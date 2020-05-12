@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_flight_flight,flight.flight,model_flight_flight,base.group_user,1,1,1,1
+access_flight_aircraft,flight.aircraft,model_flight_aircraft,base.group_user,1,1,1,1
+access_flight_catalogue,flight.catalogue,model_flight_catalogue,base.group_user,1,1,1,1
+access_flight_mission_class,flight.mission.class,model_flight_mission_class,base.group_user,1,1,1,1
+access_flight_items,flight.items,model_flight_items,base.group_user,1,1,1,1
+access_flight_addtional_equipment,flight.addtional.equipment,model_flight_addtional_equipment,base.group_user,1,1,1,1
+
+access_flight_mission,flight.mission,model_flight_mission,base.group_user,1,1,1,1
+
+
+
+
+
+
+
+
