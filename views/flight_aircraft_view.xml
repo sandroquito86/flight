@@ -8,6 +8,9 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
+                    <field name="aircraft_type_id"/>
+                    <field name="security_type_id"/>                    
+                    <field name="acquisition_date"/>
                 </tree>
             </field>
         </record>
@@ -75,6 +78,25 @@
                         </group>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <record id="view_flight_aircraft_search" model="ir.ui.view">
+            <field name="name">flight.aircraft</field>
+            <field name="model">flight.aircraft</field>
+            <field name="arch" type="xml">
+
+            Estado, Fecha de adquisición.
+                <search string="">
+                    <!--buscara por los campos que especifiquemos aqui-->
+                    <field name="name"/>
+                    <field name="description"/>
+
+                    <!--permite agrupar  por un criterio-->
+                    <group>
+                        <filter name="catalogue_id" string="Agrupar Catalogo" context="{'group_by': 'catalogue_id' }" />
+                    </group>
+                </search>
             </field>
         </record>
 

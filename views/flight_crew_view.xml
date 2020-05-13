@@ -24,19 +24,22 @@
                             <group>
                                 <field name="name"/>
                             </group>
+                            <group>
+                                <field name="medical_record_ids"/>
+                            </group>
                         </group>
                         <group>
                             <notebook>
                                 <page string="DATOS DE FICHA MEDICA">
                                     <group>
-                                        <field name="apto"/>
+                                        <field name="crew_result_id" options="{ 'no_open': True}"/>
+                                        <field name="crew_date_report" />
+                                        <field name="crew_referent_document" />
+                                        <field name="crew_observation" />
                                     </group>
                                 </page>
                             </notebook>
-
                         </group>
-
-
                     </sheet>
                 </form>
             </field>

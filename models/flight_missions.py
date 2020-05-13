@@ -12,8 +12,7 @@ class Mission(models.Model):
    name = fields.Char(string="Código de la Misión", 
    required=True, size=20
    )
-   
-    
+       
    mission_type_id = fields.Many2one(
         string='Tipo de Misión',
         comodel_name='flight.mission.class',
@@ -27,21 +26,18 @@ class Mission(models.Model):
         column2='attachment_id',
         string='Archivo Adjunto'
    )
+
    warning = {
         'title': 'Advertancia!',
         'message' : 'Your message.'
          }
-
-   
-  
       
    @api.onchange('name')
    def _name_validation(self):                
       if set(str(self.name)).difference(ascii_letters + digits + '-'): 
-         self.warning['message'] ="Caracteres Invalidos!! \nSolo permite letras numeros y guión medio (-)"                     
+         self.warning['message'] ="Caracteres Invalidos en CÓDIGO DE LA MISIÓN!! \nSolo permite letras numeros y guión medio (-)"                     
          self.name=""
-         return {'warning': self.warning}
-         
+         return {'warning': self.warning}         
             
    @api.onchange('attachment_ids')
    def _archive(self):

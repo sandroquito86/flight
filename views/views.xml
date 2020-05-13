@@ -3,55 +3,56 @@
     <!-- explicit list view definition -->
 
     <record model="ir.ui.view" id="flight.list">
-      <field name="name">flight list</field>
+      <field name="name">flight.medical.record</field>
       <field name="model">flight.medical.record</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="result"/>
-           <field name="date_report"/>
-          
+          <field name="result_id"/>
+          <field name="date_report"/>
+          <field name="create_date"/>
+
         </tree>
       </field>
     </record>
 
     <record id="view_fligrew_form" model="ir.ui.view">
-            <field name="name">hr.employee</field>
-            <field name="model">flight.medical.record</field>            
-            <field name="arch" type="xml">
-                <form string="NUEVO">
-                    <sheet>                        
-                        <group>
-                            <group>
-                                <field name="result"/>
-                                <field name="date_report"/>
-                                <field name="hr_employee_id"/>
-                                
-                                
-                            </group>
-                            
-                        </group>
-                        <group>
-                           
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+      <field name="name">flight.medical.record</field>
+      <field name="model">flight.medical.record</field>
+      <field name="arch" type="xml">
+        <form string="NUEVO">
+          <sheet>
+            <group>
+              <group>
+                <field name="hr_employee_id"/>
+                <field name="result_id" options="{'no_open': True}"/>
+                <field name="date_report"/>
+                <field name="referent_document"/>
+                <field name="observation"/>
+              </group>
+
+            </group>
+            <group>
+
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
 
     <!-- actions opening views on models -->
-
+    <!--field name="limit">2</field-->
     <record model="ir.actions.act_window" id="flight.action_window">
       <field name="name">VUELOS</field>
       <field name="res_model">flight.medical.record</field>
-      <!--field name="limit">2</field-->
+      <field name="limit">10</field>
       <field name="view_mode">tree,form</field>
     </record>
 
 
     <!-- server action to the one above -->
 
-   
+
 
 
     <!-- Top menu item -->
@@ -60,65 +61,41 @@
 
     <!-- MENU PRINCIPAL -->
 
-    <menuitem name="Reservaciones" 
-    id="menu_flight_reservations" 
-    parent="menu_flight"/>
+    <menuitem name="Reservaciones" id="menu_flight_reservations" parent="menu_flight"/>
 
 
-    <menuitem name="Vuelos" 
-    id="menu_flight_flight" 
-    parent="menu_flight"/>
+    <menuitem name="Vuelos" id="menu_flight_flight" parent="menu_flight"/>
 
-    <menuitem name="Registros" 
-    id="menu_flight_records" 
-    parent="menu_flight"/>
+    <menuitem name="Registros" id="menu_flight_records" parent="menu_flight"/>
 
-    <menuitem name="Reportes" 
-    id="menu_flight_reports" 
-    parent="menu_flight"/>
+    <menuitem name="Reportes" id="menu_flight_reports" parent="menu_flight"/>
 
-    <menuitem name="Administracion" 
-    id="menu_flight_administration" 
-    parent="menu_flight"/>
+    <menuitem name="Administracion" id="menu_flight_administration" parent="menu_flight"/>
 
     <!-- SUBMENU  RESERVACIONES-->
-    <menuitem name="sub menu reservaciones" 
-    id="submenu_reservaciones" 
-    parent="menu_flight_reservations"
-    action="flight.action_window"/>
+    <menuitem name="sub menu reservaciones" id="submenu_reservaciones" parent="menu_flight_reservations" action="flight.action_window"/>
 
 
 
     <!-- SUBMENU  VUELOS-->
-    <menuitem name="submenuvuelos" 
-    id="submenu_vuelos" 
-    parent="menu_flight_flight"
-    action="flight.action_window"/>
-    
-      
+    <menuitem name="submenuvuelos" id="submenu_vuelos" parent="menu_flight_flight" action="flight.action_window"/>
+
+
 
     <!-- SUBMENU  REGISTRO-->
-    
 
-    
+
+
 
 
 
     <!-- SUBMENU  REPORTE-->
-    <menuitem name="sub menu reporte" 
-    id="submenu_reporte" 
-    parent="menu_flight_reports"
-    action="flight.action_window"/>
+    <menuitem name="sub menu reporte" id="submenu_reporte" parent="menu_flight_reports" action="flight.action_window"/>
 
-     <!-- SUBMENU  ADMINISTRACION-->
-    <menuitem name="Administración de Usuarios" 
-    id="submenu_administracion_usuario" 
-    parent="menu_flight_administration"
-    action="flight.action_window"/>
+    <!-- SUBMENU  ADMINISTRACION-->
+    <menuitem name="Administración de Usuarios" id="submenu_administracion_usuario" parent="menu_flight_administration" action="flight.action_window"/>
 
-    <menuitem name="Catálogos" 
-    id="menu_flight_administration_catalogue" 
-    parent="menu_flight_administration"/>
+    <menuitem name="Catálogos" id="menu_flight_administration_catalogue" parent="menu_flight_administration"/>
 
 
 
@@ -128,57 +105,27 @@
 
     <!--SUBMENU CATALOGOS-->
 
-    <menuitem name="Lugar" 
-    id="menu_flight_administration_catalogue_lugar" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Lugar" id="menu_flight_administration_catalogue_lugar" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Aeródromo" 
-    id="menu_flight_administration_catalogue_aerodromo" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Aeródromo" id="menu_flight_administration_catalogue_aerodromo" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Medios de Comunicación" 
-    id="menu_flight_administration_catalogue_medioscomunicacion" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Medios de Comunicación" id="menu_flight_administration_catalogue_medioscomunicacion" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Tipos de Motores" 
-    id="menu_flight_administration_catalogue_tiposmotores" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Tipos de Motores" id="menu_flight_administration_catalogue_tiposmotores" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Escuadrones" 
-    id="menu_flight_administration_catalogue_escuadrones" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Escuadrones" id="menu_flight_administration_catalogue_escuadrones" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Condición de Vuelo" 
-    id="menu_flight_administration_catalogue_condicionvuelo" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Condición de Vuelo" id="menu_flight_administration_catalogue_condicionvuelo" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Habilitación" 
-    id="menu_flight_administration_catalogue_habilitacion" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Habilitación" id="menu_flight_administration_catalogue_habilitacion" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Responsabilidades" 
-    id="menu_flight_administration_catalogue_responsabilidades" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Responsabilidades" id="menu_flight_administration_catalogue_responsabilidades" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Tipo Simulador" 
-    id="menu_flight_administration_catalogue_tiposimulador" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Tipo Simulador" id="menu_flight_administration_catalogue_tiposimulador" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-    <menuitem name="Sensores" 
-    id="menu_flight_administration_catalogue_sensores" 
-    parent="menu_flight_administration_catalogue"
-    action="flight.action_window"/>
+    <menuitem name="Sensores" id="menu_flight_administration_catalogue_sensores" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
 
-   
+
 
 
   </data>

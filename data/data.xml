@@ -48,6 +48,10 @@
             <field name="id">10</field>
             <field name="name">Tipo de seguro</field>
         </record>
+        <record id="catalogue_id11" model="flight.catalogue">
+            <field name="id">11</field>
+            <field name="name">Resultado</field>
+        </record>
         
 
         
