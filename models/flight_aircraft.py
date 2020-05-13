@@ -162,14 +162,7 @@ class Aircraft(models.Model):
         size=250     )
 
     #HASTA AQUI ESTA VALIDADO
-   
-
-    
-    
-    
-
-    
-
+ 
     additional_ids = fields.Many2many(
         string='Equipos Adicionales',
         comodel_name='flight.addtional.equipment',
@@ -177,23 +170,19 @@ class Aircraft(models.Model):
         column1='additional_id',
         column2='aircraft_id',
     )
-    
-    
-
-    
-
+   
     load_number = fields.Float(
         string='Número Máximo Permitido de Carga',
     )
-
-    
-    
+   
     security_type_id = fields.Many2one(
         string='Tipo de Seguro',
         comodel_name='flight.items',
         ondelete='restrict',
         domain="[('catalogue_id', '=', 10)]"
     )
+
+    
 
     
     
@@ -225,16 +214,36 @@ class Aircraft(models.Model):
             self.security_type_id=""
 
 
+    warning = {
+        'title': 'Advertancia!',
+        'message' : 'Your message.'
+         }
+    
+
+    
+
     @api.onchange('name','maker','making_year','change_radiogram')
-    def _name_validation_name(self):        
-        if set(str(self.name)).difference(ascii_letters + digits + '-'):                 
-            self.name=""
-        if set(str(self.maker)).difference(ascii_letters + digits + '-'):     
-                self.maker=""
-        if (not str(self.making_year).isdigit()) or len(str(self.making_year))!=4:
-            self.making_year=""
-        if set(str(self.change_radiogram)).difference(ascii_letters + digits + '-'):     
-                self.change_radiogram=""      
+    def _name_validation_name(self):
+        flag=False
+        if set(str(self.name)).difference(ascii_letters + digits + '-'):
+            self.warning['message'] ="Caracteres Invalidos en campo NÚMERO DE MATRÍCULA"  
+            flag=True 
+            self.name=""                            
+        if set(str(self.maker)).difference(ascii_letters + digits + '-'):  
+            self.warning['message'] ="Caracteres Invalidos en campo FABRICANTE"   
+            flag=True
+            self.maker=""
+        if self.making_year:
+            if ((not str(self.making_year).isdigit()) or len(str(self.making_year))!=4):
+                self.warning['message'] ="AÑO DE FABRICACIÓN debe tener 4 dígitos"  
+                flag=True  
+                self.making_year=""          
+        if set(str(self.change_radiogram)).difference(ascii_letters + digits + '-'):
+            self.warning['message'] ="Caracteres Invalidos en campo RADIOGRAMA DE CAMBIO DE SEGURO"      
+            flag=True
+            self.change_radiogram=""   
+        if flag:                                 
+            return {'warning': self.warning}
 
    
     """

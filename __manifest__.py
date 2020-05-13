@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','hr'],
 
     # always loaded
     'data': [
@@ -31,7 +31,7 @@
         'views/flight_aircraft_view.xml',
         'views/flight_catalogue_view.xml',
         'views/flight_mission_view.xml',
-        
+        'views/flight_crew_view.xml',        
     ],
     # only loaded in demonstration mode
     'demo': [

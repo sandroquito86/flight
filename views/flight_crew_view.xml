@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_flight_crew_tree">
+            <field name="name">hr.employee</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="document_id"/>
+                    <field name="name"/>
+                    <field name="crew_degree"/>
+                    <field name="department_id" string="Reparto"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_flight_crew_form" model="ir.ui.view">
+            <field name="name">hr.employee</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <form string="NUEVO">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="DATOS DE FICHA MEDICA">
+                                    <group>
+                                        <field name="apto"/>
+                                    </group>
+                                </page>
+                            </notebook>
+
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_flight_crew">
+            <field name="name">TRIPULANTES</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem name="Tripulantes" id="menu_action_flight_crew" parent="menu_flight_records" action="action_flight_crew"/>
+
+    </data>
+</odoo>

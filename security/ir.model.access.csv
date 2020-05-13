@@ -7,6 +7,8 @@ access_flight_items,flight.items,model_flight_items,base.group_user,1,1,1,1
 access_flight_addtional_equipment,flight.addtional.equipment,model_flight_addtional_equipment,base.group_user,1,1,1,1
 
 access_flight_mission,flight.mission,model_flight_mission,base.group_user,1,1,1,1
+access_flight_medical_record,flight.medical.record,model_flight_medical_record,base.group_user,1,1,1,1
+
 
 
 

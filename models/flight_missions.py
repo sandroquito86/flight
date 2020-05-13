@@ -27,28 +27,45 @@ class Mission(models.Model):
         column2='attachment_id',
         string='Archivo Adjunto'
    )
+   warning = {
+        'title': 'Advertancia!',
+        'message' : 'Your message.'
+         }
 
    
+  
+      
    @api.onchange('name')
    def _name_validation(self):                
-      if set(str(self.name)).difference(ascii_letters + digits + '-'):                   
+      if set(str(self.name)).difference(ascii_letters + digits + '-'): 
+         self.warning['message'] ="Caracteres Invalidos!! \nSolo permite letras numeros y guión medio (-)"                     
          self.name=""
+         return {'warning': self.warning}
+         
             
    @api.onchange('attachment_ids')
-   def _archive(self):      
-      if(len(self.attachment_ids)>1): 
-         self.attachment_ids.unlink(self.id)          
-      text=str(self.attachment_ids.name)
-      if self.attachment_ids.name:
-         if not text.endswith(".pdf"): 
-            self.attachment_ids.unlink()             
-         else:
-            if(text.find(" ")<0):
-               if set(text).difference(ascii_letters + digits + '-' + '.'):                                
-                  self.attachment_ids.unlink()                     
+   def _archive(self):
+      if(self.attachment_ids) :     
+         if(len(self.attachment_ids)>1): 
+            self.attachment_ids.unlink() 
+            self.warning['message'] ="Por favor seleccione un archivo a la vez!!"      
+         text=str(self.attachment_ids.name)
+         if self.attachment_ids.name:
+            if not text.endswith(".pdf"): 
+               self.attachment_ids.unlink()
+               self.warning['message'] ="Solo se puede subir archivos PDF!!"            
             else:
-               self.attachment_ids.unlink() 
+               if(text.find(" ")<0):
+                  if set(text).difference(ascii_letters + digits + '-' + '.'):                                
+                     self.attachment_ids.unlink() 
+                     self.warning['message'] ="El nombre del archivo pdf tiene caracteres no validos!!"                       
+               else:
+                  self.attachment_ids.unlink() 
+         return {'warning': self.warning}
       
+
+
+
 
       
          
