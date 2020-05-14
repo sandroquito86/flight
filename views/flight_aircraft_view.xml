@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <record model="ir.ui.view" id="view_flight_aircraft_tree">
             <field name="name">flight.aircraft</field>
             <field name="model">flight.aircraft</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="model_id"/>
                     <field name="name"/>
                     <field name="aircraft_type_id"/>
-                    <field name="security_type_id"/>                    
+                    <field name="security_type_id"/>
+                    <field name="status_id"/>
                     <field name="acquisition_date"/>
                 </tree>
+            </field>
+        </record>
+
+        <record id="view_flight_aircraft_search" model="ir.ui.view">
+            <field name="name">flight.aircraft</field>
+            <field name="model">flight.aircraft</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <!--buscara por los campos que especifiquemos aqui-->
+                    <field name="name"/>
+                    <field name="aircraft_type_id"/>
+                    <field name="security_type_id"/>
+                    <field name="status_id"/>
+                    <field name="acquisition_date"/>
+                    <!--permite agrupar  por un criterio-->
+                    <group>
+                        <filter name="status_id" string="Estado" context="{'group_by': 'status_id' }" />
+                        <filter name="aircraft_type_id" string="Aeronave" context="{'group_by': 'aircraft_type_id' }" />
+                    </group>
+                </search>
             </field>
         </record>
 
@@ -43,13 +64,16 @@
                                 <field name="slow_speed"/>
                                 <field name="max_height"/>
                                 <field name="mission_class_ids" widget="many2many_tags"/>
-                                <field name="navigation_equipment_id"/>
+                                <field name="navigation_equipment_id" options="{'no_open': True}"/>
                                 <field name="communication_id" options="{'no_open': True}"/>
                                 <field name="detection_id" options="{'no_open': True}"/>
                                 <field name="additional_ids" widget="many2many_tags"/>
-                                <field name="max_passenger" options="{'no_open': True}"/>
-                                <field name="max_weight" options="{'no_open': True}"/>
-                                <field name="load_number" options="{'no_open': True}"/>
+                                <field name="load_number" />
+                                <field name="max_passenger" />
+                                <field name="max_weight" />
+                                <field name="fuel_weight" />
+                                <field name="take_off_weight" widget="char"/>                                
+                                
                                 <field name="status_id" options="{'no_open': True}"/>
                             </group>
                             <group>
@@ -73,36 +97,18 @@
                                     </page>
                                 </notebook>
                             </group>
-
-
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
 
-        <record id="view_flight_aircraft_search" model="ir.ui.view">
-            <field name="name">flight.aircraft</field>
-            <field name="model">flight.aircraft</field>
-            <field name="arch" type="xml">
 
-            Estado, Fecha de adquisición.
-                <search string="">
-                    <!--buscara por los campos que especifiquemos aqui-->
-                    <field name="name"/>
-                    <field name="description"/>
-
-                    <!--permite agrupar  por un criterio-->
-                    <group>
-                        <filter name="catalogue_id" string="Agrupar Catalogo" context="{'group_by': 'catalogue_id' }" />
-                    </group>
-                </search>
-            </field>
-        </record>
 
         <record model="ir.actions.act_window" id="action_flight_aircraft">
             <field name="name">AERONAVES</field>
             <field name="res_model">flight.aircraft</field>
+            <field name="limit">15</field>
             <field name="view_mode">tree,form</field>
         </record>
 

@@ -38,9 +38,9 @@ class Aircraft(models.Model):
         string='Fecha de Adquisición',         
         required=True      )
 
-    airworthiness_center = fields.Integer(
+    airworthiness_center = fields.Char(
         string='Certificado de Aeronavegabilidad',
-        size=7    )
+        size=70   )
 
     maker = fields.Char(string="Fabricante", 
         size=70    )
@@ -126,22 +126,34 @@ class Aircraft(models.Model):
         string='Equipos de Detección',
         comodel_name='flight.items',
         ondelete='restrict',
-        domain="[('catalogue_id', '=', 10)]",
+        domain="[('catalogue_id', '=', 8)]",
         required=True    )
 
     max_passenger = fields.Integer(
         string='Número Máximo Permitido de Pasajeros',
         required=True    )
+    
+    load_number = fields.Float(
+        string='Número Máximo Permitido de Carga',
+    )
 
     max_weight = fields.Float(
         string='Peso Máximo Permitido por Pasajero',
         required=True    )
 
+    fuel_weight = fields.Float(
+        string='Peso total de combustible',
+        required=True    )
+
+    take_off_weight = fields.Float(
+        string='Peso máximo de despegue',
+        required=True    )    
+
     status_id = fields.Many2one(
         string='Estado',
         comodel_name='flight.items',
         ondelete='restrict',
-        domain="[('catalogue_id', '=', 11)]",
+        domain="[('catalogue_id', '=', 9)]",
         required=True   )
 
     security_type_id = fields.Many2one(
@@ -157,11 +169,11 @@ class Aircraft(models.Model):
         size=70     )
 
     security_observation= fields.Text(
-        string="Radiograma de Cambio de Seguro", 
+        string="Observaciones del seguro", 
         required=True, 
         size=250     )
 
-    #HASTA AQUI ESTA VALIDADO
+ 
  
     additional_ids = fields.Many2many(
         string='Equipos Adicionales',
@@ -171,9 +183,7 @@ class Aircraft(models.Model):
         column2='aircraft_id',
     )
    
-    load_number = fields.Float(
-        string='Número Máximo Permitido de Carga',
-    )
+   
    
     security_type_id = fields.Many2one(
         string='Tipo de Seguro',
@@ -182,10 +192,7 @@ class Aircraft(models.Model):
         domain="[('catalogue_id', '=', 10)]"
     )
 
-    
-
-    
-    
+   
     @api.onchange('aircraft_type_id','model_id',
     'squadron_id','turbine_type_id',
     'engine_type_id',
@@ -218,10 +225,7 @@ class Aircraft(models.Model):
         'title': 'Advertancia!',
         'message' : 'Your message.'
          }
-    
-
-    
-
+   
     @api.onchange('name','maker','making_year','change_radiogram')
     def _name_validation_name(self):
         flag=False
@@ -245,29 +249,18 @@ class Aircraft(models.Model):
         if flag:                                 
             return {'warning': self.warning}
 
-   
-    """
-    @api.model
-    def create(self, values):
     
-           # Create a new record for a model ModelName
-           # @param values: provides a data for new record
+    @api.onchange('take_off_weight')
+    def _take_off_weight_validate(self):
+        if self.take_off_weight < (self.max_passenger*self.max_weight)+self.fuel_weight:
+            self.take_off_weight=""
+            self.warning['message'] = "El peso máximo de despegue no puede ser menor\n(Número Máximo Permitido de Pasajeros * Peso Máximo Permitido por Pasajero)+ Peso total de combustible)"
+            return {'warning': self.warning}
+        
     
-            @return: returns a id of new record
-           
-        result = super(Aircraft, self).create(values)       
-        
-        valor= int(result.aircraft_type_id.catalogue_id)
-        if valor!=1:
-            raise ValidationError("EL ITEM NO PERTENECE A TIPO DE AERONAVE!!")
-
-        
           
-        
-        
-        return result
-    
-    """
+   
+   
 
 
     

@@ -19,6 +19,15 @@ class Mission(models.Model):
         ondelete='restrict',
    )
 
+   training_program = fields.Char(
+      string="Programa de entrenamiento o Programa operativo", 
+      related='attachment_ids.name',     
+      )
+
+   
+      
+     
+   
    attachment_ids = fields.Many2many(
         comodel_name='ir.attachment',
         relation='attachments_rel',
@@ -29,8 +38,10 @@ class Mission(models.Model):
 
    warning = {
         'title': 'Advertancia!',
-        'message' : 'Your message.'
+        'message' : 'Archivo PDF subido con exito.'
          }
+
+  
       
    @api.onchange('name')
    def _name_validation(self):                
