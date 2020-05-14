@@ -9,6 +9,7 @@ class Aircraft(models.Model):
     _name = 'flight.aircraft'
     _description = 'flight.aircraft'
     
+    #bandera para definir si cambio tipo de seguro
 
     name = fields.Char(string="Numero de Matrícula", 
         required=True, size=10    )
@@ -124,6 +125,8 @@ class Aircraft(models.Model):
         domain="[('catalogue_id', '=', 10)]" )
 
     
+   
+    
     #Ingreso del historico
     @api.model
     def create(self, values):  
@@ -133,10 +136,27 @@ class Aircraft(models.Model):
             'history_change_radiogram':values['change_radiogram'],
             'history_security_observation':values['security_observation'],
             'aircraft_id':result.id,
-        } 
+        }
         self.env['flight.aircraft.history'].create(vals)              
-        return result    
+        return result
 
+    
+   
+    def write(self, values):
+        if 'security_type_id' in values:               
+            vals={
+                'history_security_type_id':int(self.security_type_id),
+                'history_change_radiogram':values['change_radiogram'],
+                'history_security_observation':values['security_observation'],
+                'aircraft_id':self.id,
+            }
+            self.env['flight.aircraft.history'].create(vals)   
+        result = super(Aircraft, self).write(values)
+        return result
+    
+
+    
+    
    
     @api.onchange('aircraft_type_id','model_id', 'squadron_id','turbine_type_id','engine_type_id',
     'navigation_equipment_id','communication_id', 'detection_id','status_id','security_type_id')
@@ -150,8 +170,13 @@ class Aircraft(models.Model):
         if(int(self.communication_id.catalogue_id)!=7):         self.communication_id=""
         if(int(self.detection_id.catalogue_id)!=8):             self.detection_id=""
         if(int(self.status_id.catalogue_id)!=9):                self.status_id=""
-        if(int(self.security_type_id.catalogue_id)!=10):        self.security_type_id=""
-
+        if(int(self.security_type_id.catalogue_id)!=10):        
+            self.security_type_id=""
+        else:
+            self.change_radiogram=""
+            self.security_observation=""
+       
+              
 
     warning = {'title': 'Advertancia!', 'message' : 'Your message.' }
    
@@ -192,16 +217,16 @@ class AircraftHistory(models.Model):
     _description = 'flight.aircraft.history'
 
     history_security_type_id = fields.Many2one(string='Tipo de Seguro', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogue_id', '=', 10)]", required=True)
+        ondelete='restrict', domain="[('catalogue_id', '=', 10)]",)
 
-    history_change_radiogram= fields.Char(string="Radiograma de Cambio de Seguro", required=True,size=70)
+    history_change_radiogram= fields.Char(string="Radiograma de Cambio de Seguro" ,size=70)
 
-    history_security_observation= fields.Text(string="Observaciones del seguro",  required=True, size=250 )
+    history_security_observation= fields.Text(string="Observaciones del seguro" , size=250 )
     
     aircraft_id = fields.Many2one(string='Aeronave', comodel_name='flight.aircraft', ondelete='restrict',)
     
 
-    warning = { 'title': 'Advertancia!', 'message' : 'Your message.' }
+    warning = { 'title': 'Advertencia!', 'message' : 'Your message.' }
 
 
     @api.onchange('history_change_radiogram','history_security_observation')
