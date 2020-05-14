@@ -8,8 +8,10 @@
                 <tree>
                     <field name="name"/>
                     <field name="mission_type_id"/>
-                    <field name="training_program"/>
-                    <field name="attachment_ids" />
+                    <field name="training_program" />
+                    <field name="attachment_ids" /> 
+                    
+                                      
                 </tree>
             </field>
         </record>

@@ -102,13 +102,9 @@
                 </form>
             </field>
         </record>
-
-
-
         <record model="ir.actions.act_window" id="action_flight_aircraft">
             <field name="name">AERONAVES</field>
             <field name="res_model">flight.aircraft</field>
-            <field name="limit">15</field>
             <field name="view_mode">tree,form</field>
         </record>
 
