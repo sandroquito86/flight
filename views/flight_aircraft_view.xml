@@ -42,61 +42,79 @@
             <field name="arch" type="xml">
                 <form string="testeando">
                     <sheet>
-                        <group>
-                            <group>
-                                <field name="name"/>
-                                <field name="aircraft_type_id" options="{'no_open': True}"/>
-                                <field name="model_id" options="{'no_open': True}"/>
-                                <field name="squadron_id" options="{'no_open': True}"/>
-                                <field name="acquisition_date" />
-                                <field name="airworthiness_center"/>
-                                <field name="maker"/>
-                                <field name="making_year" filter_domain="[('making_year', '&gt;=', self)]"/>
-                                <field name="wingspan"/>
-                                <field name="turbine_type_id" options="{'no_open': True}"/>
-                                <field name="power"/>
-                                <field name="engine_type_id" options="{'no_open': True}"/>
-                                <field name="maneuver_speed"/>
-                            </group>
-                            <group>
-                                <field name="economic_speed"/>
-                                <field name="fast_speed"/>
-                                <field name="slow_speed"/>
-                                <field name="max_height"/>
-                                <field name="mission_class_ids" widget="many2many_tags"/>
-                                <field name="navigation_equipment_id" options="{'no_open': True}"/>
-                                <field name="communication_id" options="{'no_open': True}"/>
-                                <field name="detection_id" options="{'no_open': True}"/>
-                                <field name="additional_ids" widget="many2many_tags"/>
-                                <field name="load_number" />
-                                <field name="max_passenger" />
-                                <field name="max_weight" />
-                                <field name="fuel_weight" />
-                                <field name="take_off_weight" widget="char"/>                                
-                                
-                                <field name="status_id" options="{'no_open': True}"/>
-                            </group>
-                            <group>
-                                <notebook>
-                                    <page string="Dimensiones">
-                                        <group>
-                                            <field name="length_dimension"/>
-                                            <field name="height_dimension"/>
-                                        </group>
-                                    </page>
-                                </notebook>
-                            </group>
-                            <group>
-                                <notebook>
-                                    <page string="Seguro">
-                                        <group>
-                                            <field name="security_type_id" options="{'no_open': True}"/>
-                                            <field name="change_radiogram"/>
-                                            <field name="security_observation"/>
-                                        </group>
-                                    </page>
-                                </notebook>
-                            </group>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="abrir_hijo" type="object" class="oe_stat_button" icon="fa-table">
+                               <field name="count_historic" widget="statinfo"/> 
+                            </button>
+                        </div>
+                        <group colspan="3">
+                            <notebook >
+                                <page string="grupo1">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="aircraft_type_id" options="{'no_open': True}"/>
+                                        <field name="model_id" options="{'no_open': True}"/>
+                                        <field name="squadron_id" options="{'no_open': True}"/>
+                                        <field name="acquisition_date" />
+                                        <field name="airworthiness_center"/>
+                                        <field name="maker"/>
+                                    </group>
+                                </page>
+
+                                <page string="grupo2">
+                                    <group>
+                                        <field name="making_year" filter_domain="[('making_year', '&gt;=', self)]"/>
+                                        <field name="wingspan"/>
+                                        <field name="turbine_type_id" options="{'no_open': True}"/>
+                                        <field name="power"/>
+                                        <field name="engine_type_id" options="{'no_open': True}"/>
+                                        <field name="maneuver_speed"/>
+                                    </group>
+                                </page>
+                                <page string="Velocidad">
+                                    <group>
+                                        <field name="economic_speed"/>
+                                        <field name="fast_speed"/>
+                                        <field name="slow_speed"/>
+                                        <field name="max_height"/>
+                                        <field name="mission_class_ids" widget="many2many_tags"/>
+                                    </group>
+                                </page>
+                                <page string="Equipos">
+                                    <group>
+                                        <field name="navigation_equipment_id" options="{'no_open': True}"/>
+                                        <field name="communication_id" options="{'no_open': True}"/>
+                                        <field name="detection_id" options="{'no_open': True}"/>
+                                        <field name="additional_ids" widget="many2many_tags"/>
+
+                                    </group>
+                                </page>
+
+                                <page string="Pasajeros">
+                                    <group>
+                                        <field name="load_number" />
+                                        <field name="max_passenger" />
+                                        <field name="max_weight" />
+                                        <field name="fuel_weight" />
+                                        <field name="take_off_weight" widget="char"/>
+                                        <field name="status_id" options="{'no_open': True}"/>
+                                    </group>
+                                </page>
+                                <page string="Dimensiones">
+                                    <group>
+                                        <field name="length_dimension"/>
+                                        <field name="height_dimension"/>
+                                    </group>
+                                </page>
+                                <page string="Seguro">
+                                    <group>
+                                        <field name="security_type_id" options="{'no_open': True}"/>
+                                        <field name="change_radiogram"/>
+                                        <field name="security_observation"/>
+                                    </group>
+                                </page>
+                            </notebook>
+
                         </group>
                     </sheet>
                 </form>

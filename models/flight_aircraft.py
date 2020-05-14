@@ -14,6 +14,12 @@ class Aircraft(models.Model):
     name = fields.Char(string="Numero de Matrícula", 
         required=True, size=10    )
 
+    
+    count_historic = fields.Integer(
+        string='Historico', compute="get_contador"
+    )
+    
+
     aircraft_type_id = fields.Many2one(
         string='Tipo de aeronave', comodel_name='flight.items', ondelete='restrict',
         domain="[('catalogue_id', '=', 1)]", required=True)
@@ -125,7 +131,10 @@ class Aircraft(models.Model):
         domain="[('catalogue_id', '=', 10)]" )
 
     
-   
+    def get_contador(self):
+        #hace referencia a un objeto y permite contar en base a un criterio
+        contar= self.env['flight.aircraft.history'].search_count([('aircraft_id', '=', self.id)])
+        self.count_historic=contar
     
     #Ingreso del historico
     @api.model
