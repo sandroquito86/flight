@@ -16,7 +16,7 @@ class Aircraft(models.Model):
 
     
     count_historic = fields.Integer(
-        string='Historico', compute="get_contador"
+        string='Historico Tipo Seguro', compute="get_contador"
     )
     
 
@@ -130,28 +130,53 @@ class Aircraft(models.Model):
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
         domain="[('catalogue_id', '=', 10)]" )
 
+    #Abrimos la vista historico
+    def history_open(self):
+        
+        return {
+            'name': ('Historico Tipo de Seguro'),
+            'domain': [('aircraft_id', '=', self.id)],
+            'res_model': 'flight.aircraft.history.securitytype',
+            'view_id': False,
+            'view_mode': 'tree,form',
+            'type': 'ir.actions.act_window',
+        }
+
     
     def get_contador(self):
         #hace referencia a un objeto y permite contar en base a un criterio
-        contar= self.env['flight.aircraft.history'].search_count([('aircraft_id', '=', self.id)])
+        contar= self.env['flight.aircraft.history.securitytype'].search_count([('aircraft_id', '=', self.id)])
         self.count_historic=contar
     
     #Ingreso del historico
     @api.model
     def create(self, values):  
-        result = super(Aircraft, self).create(values)        
+        result = super(Aircraft, self).create(values)
+        listar=[]
+        for item in result.additional_ids:
+             listar.append(item.name)
+        self.env['flight.aircraft.history.equipment'].create({'history_additional_equipment':str(listar),'aircraft_id':result.id})
         vals={
             'history_security_type_id':values['security_type_id'],
             'history_change_radiogram':values['change_radiogram'],
-            'history_security_observation':values['security_observation'],
+            'history_security_observation':values['security_observation'],            
             'aircraft_id':result.id,
         }
-        self.env['flight.aircraft.history'].create(vals)              
+        
+        self.env['flight.aircraft.history.securitytype'].create(vals)              
         return result
 
     
-   
+    #actualizacion de historico
     def write(self, values):
+        result = super(Aircraft, self).write(values)
+        if 'additional_ids' in values:
+            listar=[]
+            for item in self.additional_ids:
+                listar.append(item.name)
+            self.env['flight.aircraft.history.equipment'].create({'history_additional_equipment':str(listar),'aircraft_id':self.id})
+       
+    
         if 'security_type_id' in values:               
             vals={
                 'history_security_type_id':int(self.security_type_id),
@@ -159,8 +184,8 @@ class Aircraft(models.Model):
                 'history_security_observation':values['security_observation'],
                 'aircraft_id':self.id,
             }
-            self.env['flight.aircraft.history'].create(vals)   
-        result = super(Aircraft, self).write(values)
+            self.env['flight.aircraft.history.securitytype'].create(vals)   
+        
         return result
     
 
@@ -221,38 +246,3 @@ class Aircraft(models.Model):
             return {'warning': self.warning}   
     
   
-class AircraftHistory(models.Model):
-    _name = 'flight.aircraft.history'
-    _description = 'flight.aircraft.history'
-
-    history_security_type_id = fields.Many2one(string='Tipo de Seguro', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogue_id', '=', 10)]",)
-
-    history_change_radiogram= fields.Char(string="Radiograma de Cambio de Seguro" ,size=70)
-
-    history_security_observation= fields.Text(string="Observaciones del seguro" , size=250 )
-    
-    aircraft_id = fields.Many2one(string='Aeronave', comodel_name='flight.aircraft', ondelete='restrict',)
-    
-
-    warning = { 'title': 'Advertencia!', 'message' : 'Your message.' }
-
-
-    @api.onchange('history_change_radiogram','history_security_observation')
-    def _name_validation(self):
-        flag=False
-        if set(str(self.history_change_radiogram)).difference(ascii_letters + digits + '-'):
-            self.warning['message'] ="Caracteres Invalidos en campo RADIOGRAMA DE CAMBIO DE SEGURO"      
-            flag=True
-            self.history_change_radiogram="" 
-        if set(str(self.history_security_observation)).difference(ascii_letters + digits + '-'):
-            self.warning['message'] ="Caracteres Invalidos en campo OBSERVACIONES DEL SEGURO"      
-            flag=True
-            self.history_security_observation="" 
-        if flag:                                 
-            return {'warning': self.warning} 
-
-    @api.onchange('history_security_type_id')
-    def _onchange_field(self):       
-        if(int(self.history_security_type_id.catalogue_id)!=10):
-            self.history_security_type_id=""    

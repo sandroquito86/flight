@@ -67,6 +67,8 @@ class MisionClass(models.Model):
 class AdditionalEquipment(models.Model):
    _name = 'flight.addtional.equipment'
    _description = 'flight.addtional.equipment'
+   _rec_name= "name"
+
    name = fields.Char(string="Equipo Adicional", 
     required=True
     )

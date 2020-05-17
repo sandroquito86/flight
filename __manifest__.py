@@ -31,7 +31,11 @@
         'views/flight_aircraft_view.xml',
         'views/flight_catalogue_view.xml',
         'views/flight_mission_view.xml',
-        'views/flight_crew_view.xml',        
+        'views/flight_crew_view.xml',  
+        'views/flight_aircraft_view.xml', 
+        'views/flight_history_view.xml', 
+
+              
     ],
     # only loaded in demonstration mode
     'demo': [

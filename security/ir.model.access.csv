@@ -8,7 +8,10 @@ access_flight_addtional_equipment,flight.addtional.equipment,model_flight_addtio
 
 access_flight_mission,flight.mission,model_flight_mission,base.group_user,1,1,1,1
 access_flight_medical_record,flight.medical.record,model_flight_medical_record,base.group_user,1,1,1,1
-access_flight_aircraft_history,flight.aircraft.history,model_flight_aircraft_history,base.group_user,1,1,1,1
+access_flight_aircraft_history_securitytype,flight.aircraft.history.securitytype,model_flight_aircraft_history_securitytype,base.group_user,1,1,1,1
+access_flight_aircraft_history_equipment,flight.aircraft.history.equipment,model_flight_aircraft_history_equipment,base.group_user,1,1,1,1
+
+
 
 
 

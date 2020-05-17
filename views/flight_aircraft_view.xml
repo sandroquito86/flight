@@ -43,8 +43,8 @@
                 <form string="testeando">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="abrir_hijo" type="object" class="oe_stat_button" icon="fa-table">
-                               <field name="count_historic" widget="statinfo"/> 
+                            <button name="history_open" type="object" class="oe_stat_button" icon="fa-table">
+                               <field name="count_historic" string="Tipo Seguro" widget="statinfo"/> 
                             </button>
                         </div>
                         <group colspan="3">
