@@ -9,8 +9,6 @@
         <tree>
           <field name="result_id"/>
           <field name="date_report"/>
-          <field name="create_date"/>
-
         </tree>
       </field>
     </record>
@@ -29,10 +27,8 @@
                 <field name="referent_document"/>
                 <field name="observation"/>
               </group>
-
             </group>
             <group>
-
             </group>
           </sheet>
         </form>

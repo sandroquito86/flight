@@ -5,13 +5,14 @@
             <field name="name">flight.aircraft</field>
             <field name="model">flight.aircraft</field>
             <field name="arch" type="xml">
-                <tree>
-                    <field name="model_id"/>
-                    <field name="name"/>
+                <tree >
+                    <field name="model_id" />
+                    <field name="name" />
                     <field name="aircraft_type_id"/>
                     <field name="security_type_id"/>
                     <field name="status_id"/>
                     <field name="acquisition_date"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -27,6 +28,7 @@
                     <field name="security_type_id"/>
                     <field name="status_id"/>
                     <field name="acquisition_date"/>
+                    <field name="state" invisible='1'/>
                     <!--permite agrupar  por un criterio-->
                     <group>
                         <filter name="status_id" string="Estado" context="{'group_by': 'status_id' }" />
@@ -42,15 +44,25 @@
             <field name="arch" type="xml">
                 <form string="testeando">
                     <sheet>
+                    
                         <div class="oe_button_box" name="button_box">
-                            <button name="history_open" type="object" class="oe_stat_button" icon="fa-table">
-                               <field name="count_historic" string="Tipo Seguro" widget="statinfo"/> 
+                            <button name="history_open_security_type" type="object" class="oe_stat_button" icon="fa-book">
+                                <field name="count_historic" string="Tipo Seguro" widget="statinfo"/>
+                            </button>
+                            <button name="history_open_equipment" type="object" class="oe_stat_button" icon="fa-book">
+                                <field name="count_historic_equipment" string="Adicionales" widget="statinfo"/>
                             </button>
                         </div>
+                        
+                        <group>
+                            <field name="state"/>
+                        </group>
+
                         <group colspan="3">
                             <notebook >
                                 <page string="grupo1">
                                     <group>
+
                                         <field name="name"/>
                                         <field name="aircraft_type_id" options="{'no_open': True}"/>
                                         <field name="model_id" options="{'no_open': True}"/>

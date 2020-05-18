@@ -8,16 +8,21 @@ class Tripulantes(models.Model):
     _inherit = ['hr.employee']
 
 
-    document_id = fields.Char(
+   document_id = fields.Char(
       string='Cédula de Identidad',    
       required=True,
-      size=10    )     
+      size=10    ) 
+   
+   
+   name = fields.Char(size=15)
+   
+        
 
-    crew_degree = fields.Char(
+   crew_degree = fields.Char(
       string='Grado del Tripulante',    
       required=True    )
  
-    medical_record_ids = fields.One2many(
+   medical_record_ids = fields.One2many(
        string='Registro Medico',
        comodel_name='flight.medical.record',
        inverse_name='hr_employee_id',
@@ -25,27 +30,27 @@ class Tripulantes(models.Model):
         )
 
    
-    crew_result_id = fields.Many2one(
+   crew_result_id = fields.Many2one(
         string='Resultado',
         comodel_name='flight.items',
         ondelete='restrict',
         domain="[('catalogue_id', '=', 11)]",
          )
    
-    crew_date_report = fields.Date(
+   crew_date_report = fields.Date(
        string='Fecha de Informe',
         )
 
-    crew_referent_document = fields.Char(
+   crew_referent_document = fields.Char(
        string='Documento de Referencia',  
        required=True,
        size=70,  )
 
-    crew_observation = fields.Char(
+   crew_observation = fields.Char(
        string='Observaciones',       
        size=200,  )
    
-    crew_hr_employee_id = fields.Many2one(
+   crew_hr_employee_id = fields.Many2one(
        string='Tripulantes',
        comodel_name='hr.employee',
        ondelete='restrict',       

@@ -1,49 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record model="ir.ui.view" id="view_flight_crew_tree">
-            <field name="name">hr.employee</field>
+        <!-- primary|extension Inherited .:Form:. view for "model" -->
+        <record id="hr_view_employee_form_inherited" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
             <field name="model">hr.employee</field>
+            <!-- Please veryfiy, that the following inherited view really sticks to the naming convention. -->
+            <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="arch" type="xml">
-                <tree>
-                    <field name="document_id"/>
-                    <field name="name"/>
-                    <field name="crew_degree"/>
-                    <field name="department_id" string="Reparto"/>
-                </tree>
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page string="Registro Médico">
+                        <group>
+                            <field name="medical_record_ids"/>
+                        </group>
+                    </page>
+                </xpath>
+
             </field>
         </record>
 
-        <record id="view_flight_crew_form" model="ir.ui.view">
-            <field name="name">hr.employee</field>
+        <record id="hr_view_employee_tree_inherited" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
             <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
             <field name="arch" type="xml">
-                <form string="NUEVO">
-                    <sheet>
-                        <group>
-                            <group>
-                                <field name="name"/>
-                            </group>
-                            <group>
-                                <field name="medical_record_ids"/>
-                            </group>
-                        </group>
-                        <group>
-                            <notebook>
-                                <page string="DATOS DE FICHA MEDICA">
-                                    <group>
-                                        <field name="crew_result_id" options="{ 'no_open': True}"/>
-                                        <field name="crew_date_report" />
-                                        <field name="crew_referent_document" />
-                                        <field name="crew_observation" />
-                                    </group>
-                                </page>
-                            </notebook>
-                        </group>
-                    </sheet>
-                </form>
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="document_id"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="crew_degree"/>
+                </xpath>
+                <xpath expr="//field[@name='work_phone']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='work_email']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='job_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
             </field>
         </record>
+
+        <record id="hr_view_employee_filter_inherited" model="ir.ui.view">
+            <field name="name">hr.employee</field>
+            <field name="model">hr.employee</field>
+            <!-- Please veryfiy, that the following inherited view really sticks to the naming convention. -->
+            <field name="inherit_id" ref="hr.view_employee_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="string">Tripulante</attribute>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='category_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='message_needaction']" position="after">
+                    <field name="document_id"/>
+                </xpath>
+                <xpath expr="//filter[@name='message_needaction']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='inactive']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//filter[@name='group_manager']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='group_department']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='group_job']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='group_job']" position="after">
+                    <filter name="crew_degree" string="Grado del Tripulante" context="{'group_by': 'crew_degree' }" />
+                    <filter name="department_id" string="Reparto" context="{'group_by': 'department_id' }" />
+                </xpath>
+
+
+
+
+
+
+
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <record model="ir.actions.act_window" id="action_flight_crew">

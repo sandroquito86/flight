@@ -33,8 +33,8 @@
         'views/flight_mission_view.xml',
         'views/flight_crew_view.xml',  
         'views/flight_aircraft_view.xml', 
-        'views/flight_history_view.xml', 
-
+        'views/flight_history_securitytype_view.xml',
+        'views/flight_history_equipment.xml', 
               
     ],
     # only loaded in demonstration mode

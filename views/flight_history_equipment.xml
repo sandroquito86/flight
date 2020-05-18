@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_historico_equipment_tree">
+            <field name="name">flight.aircraft.history.equipment</field>
+            <field name="model">flight.aircraft.history.equipment</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false">
+                    <field name="create_date"  string="Fecha y Hora"/> 
+                    <field name="create_uid" string="Usuario"/>
+                    <field name="history_additional_equipment" string="Cambio Realizado"/>               
+                </tree>
+            </field>
+        </record>
+
+        <!-- model.name form view -->
+        <!-- model.name form view -->
+        <record id="view_historico_equipment_form" model="ir.ui.view">
+            <field name="name">flight.aircraft.history.equipment.form</field>
+            <field name="model">flight.aircraft.history.equipment</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false">
+                    <sheet>
+                        <group>
+                           
+                            <!-- Add your fields here -->
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+        <record model="ir.actions.act_window" id="action_historico_equipment">
+            <field name="name">flight.aircraft.history.equipment</field>
+            <field name="res_model">flight.aircraft.history.equipment</field>
+
+            <field name="view_mode">tree,form</field>
+        </record>
+
+      
+
+    </data>
+</odoo>

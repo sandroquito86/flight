@@ -18,6 +18,18 @@ class Aircraft(models.Model):
     count_historic = fields.Integer(
         string='Historico Tipo Seguro', compute="get_contador"
     )
+
+    count_historic_equipment = fields.Integer(
+        string='Historico Equipamiento Adicional', compute="get_contador_equipment"
+    )
+
+    
+    state = fields.Boolean(
+        string='Activar/Desactivar' ,
+        default=True
+        
+    )
+    
     
 
     aircraft_type_id = fields.Many2one(
@@ -131,17 +143,33 @@ class Aircraft(models.Model):
         domain="[('catalogue_id', '=', 10)]" )
 
     #Abrimos la vista historico
-    def history_open(self):
+    def history_open_security_type(self):
         
         return {
             'name': ('Historico Tipo de Seguro'),
             'domain': [('aircraft_id', '=', self.id)],
             'res_model': 'flight.aircraft.history.securitytype',
             'view_id': False,
-            'view_mode': 'tree,form',
+            'view_mode': 'tree',
             'type': 'ir.actions.act_window',
         }
 
+    def history_open_equipment(self):
+        
+        return {
+            'name': ('Historico Equipamiento Adicional'),
+            'domain': [('aircraft_id', '=', self.id)],
+            'res_model': 'flight.aircraft.history.equipment',
+            'view_id': False,
+            'view_mode': 'tree',
+            'type': 'ir.actions.act_window',
+        }
+
+        
+    def get_contador_equipment(self):
+        #hace referencia a un objeto y permite contar en base a un criterio
+        contar= self.env['flight.aircraft.history.equipment'].search_count([('aircraft_id', '=', self.id)])
+        self.count_historic_equipment=contar
     
     def get_contador(self):
         #hace referencia a un objeto y permite contar en base a un criterio

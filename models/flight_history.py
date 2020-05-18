@@ -13,7 +13,7 @@ class HistorySecurityType(models.Model):
 
     history_additional_equipment= fields.Text(string="Equipamento Adicional" , size=250 )
     
-    aircraft_id = fields.Many2one(string='Aeronave', comodel_name='flight.aircraft', ondelete='restrict',)
+    aircraft_id = fields.Many2one(string='Aeronave', comodel_name='flight.aircraft', ondelete='cascade',)
     
 
     warning = { 'title': 'Advertencia!', 'message' : 'Your message.' }
@@ -24,7 +24,7 @@ class HistoryEquipment(models.Model):
     _description = 'flight.aircraft.history.equipment'    
 
     history_additional_equipment= fields.Text(string="Equipamento Adicional" , size=250 )
-    aircraft_id = fields.Many2one(string='Aeronave', comodel_name='flight.aircraft', ondelete='restrict',)
+    aircraft_id = fields.Many2one(string='Aeronave', comodel_name='flight.aircraft', ondelete='cascade',)
     
     
     
