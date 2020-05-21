@@ -52,6 +52,14 @@
             <field name="id">11</field>
             <field name="name">Resultado</field>
         </record>
+        <record id="catalogue_id12" model="flight.catalogue">
+            <field name="id">12</field>
+            <field name="name">Habilitación</field>
+        </record>
+        <record id="catalogue_id13" model="flight.catalogue">
+            <field name="id">13</field>
+            <field name="name">Tipo de vuelo</field>
+        </record>
         
 
         

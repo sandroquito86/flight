@@ -141,6 +141,10 @@ class Aircraft(models.Model):
     security_type_id = fields.Many2one(
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
         domain="[('catalogue_id', '=', 10)]" )
+    
+    
+    
+    
 
     #Abrimos la vista historico
     def history_open_security_type(self):

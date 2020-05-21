@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+        <menuitem name="Vuelo" id="menu_flight"/>
+
+        <!-- MENU PRINCIPAL -->
+
+        <menuitem name="Reservaciones" id="menu_flight_reservations" parent="menu_flight"/>
+
+
+        <menuitem name="Vuelos" id="menu_flight_flight" parent="menu_flight"/>
+
+        <menuitem name="Registros" id="menu_flight_records" parent="menu_flight"/>
+
+        <menuitem name="Reportes" id="menu_flight_reports" parent="menu_flight"/>
+
+        <menuitem name="Administracion" id="menu_flight_administration" parent="menu_flight"/>
+
+        <!-- SUBMENU  RESERVACIONES-->
+        <menuitem name="sub menu reservaciones" id="submenu_reservaciones" parent="menu_flight_reservations" action="flight.action_window"/>
+
+
+
+        <!-- SUBMENU  VUELOS-->
+       <!--
+         <menuitem name="Plan de vuelo consolidado" id="submenu_vuelos3" parent="menu_flight_flight" action="flight.action_window"/>
+        <menuitem name="Gestión de planificación provisional anual" id="submenu_vuelos4" parent="menu_flight_flight" action="flight.action_window"/>
+        <menuitem name="Ejecución de vuelos" id="submenu_vuelos5" parent="menu_flight_flight" action="flight.action_window"/>
+        <menuitem name="Ejecución de vuelos (Info Channel)" id="submenu_vuelos6" parent="menu_flight_flight" action="flight.action_window"/>
+        <menuitem name="Registro de vuelos en simuladores" id="submenu_vuelos7" parent="menu_flight_flight" action="flight.action_window"/>
+    -->
+
+
+        <!-- SUBMENU  REGISTRO-->
+
+
+
+
+
+
+        <!-- SUBMENU  REPORTE-->
+        <menuitem name="sub menu reporte" id="submenu_reporte" parent="menu_flight_reports" action="flight.action_window"/>
+
+        <!-- SUBMENU  ADMINISTRACION-->
+        <menuitem name="Administración de Usuarios" id="submenu_administracion_usuario" parent="menu_flight_administration" action="flight.action_window"/>
+
+        <menuitem name="Catálogos" id="menu_flight_administration_catalogue" parent="menu_flight_administration"/>
+
+
+
+
+
+
+
+        <!--SUBMENU CATALOGOS-->
+
+        <menuitem name="Lugar" id="menu_flight_administration_catalogue_lugar" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Aeródromo" id="menu_flight_administration_catalogue_aerodromo" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Medios de Comunicación" id="menu_flight_administration_catalogue_medioscomunicacion" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Tipos de Motores" id="menu_flight_administration_catalogue_tiposmotores" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Escuadrones" id="menu_flight_administration_catalogue_escuadrones" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Condición de Vuelo" id="menu_flight_administration_catalogue_condicionvuelo" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Habilitación" id="menu_flight_administration_catalogue_habilitacion" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Responsabilidades" id="menu_flight_administration_catalogue_responsabilidades" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Tipo Simulador" id="menu_flight_administration_catalogue_tiposimulador" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+        <menuitem name="Sensores" id="menu_flight_administration_catalogue_sensores" parent="menu_flight_administration_catalogue" action="flight.action_window"/>
+
+
+    </data>
+</odoo>

@@ -11,6 +11,14 @@ access_flight_medical_record,flight.medical.record,model_flight_medical_record,b
 access_flight_aircraft_history_securitytype,flight.aircraft.history.securitytype,model_flight_aircraft_history_securitytype,base.group_user,1,1,1,1
 access_flight_aircraft_history_equipment,flight.aircraft.history.equipment,model_flight_aircraft_history_equipment,base.group_user,1,1,1,1
 
+access_flight_qualification,flight.qualification,model_flight_qualification,base.group_user,1,1,1,1
+
+access_flight_gestion_plan_semanal,flight.gestion.plan.semanal,model_flight_gestion_plan_semanal,base.group_user,1,1,1,1
+
+access_flight_vuelos_planificados,flight.vuelos.planificados,model_flight_vuelos_planificados,base.group_user,1,1,1,1
+
+
+
 
 
 

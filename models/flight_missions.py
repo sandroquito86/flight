@@ -14,8 +14,7 @@ class Mission(models.Model):
    )
        
    mission_type_id = fields.Many2one(
-        string='Tipo de Misión',
-        comodel_name='flight.mission.class',
+        string='Tipo de Misión', comodel_name='flight.mission.class',
         ondelete='restrict',
    )
 
@@ -24,17 +23,15 @@ class Mission(models.Model):
       related='attachment_ids.name',     
       )
 
-   
-      
-     
-   
    attachment_ids = fields.Many2many(
-        comodel_name='ir.attachment',
-        relation='attachments_rel',
-        column1='mission_id',
-        column2='attachment_id',
-        string='Archivo Adjunto'
+        comodel_name='ir.attachment', relation='attachments_rel',
+        column1='mission_id', column2='attachment_id', string='Archivo Adjunto')
+   
+   
+   state = fields.Boolean(
+       string='Estado',default=True
    )
+   
 
    warning = {
         'title': 'Advertancia!',

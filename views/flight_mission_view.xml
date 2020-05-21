@@ -7,11 +7,10 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="mission_type_id"/>
                     <field name="training_program" />
-                    <field name="attachment_ids" /> 
-                    
-                                      
+                    <field name="mission_type_id"/>
+                    <field name="attachment_ids" widget="many2many_binary"/>
+                    <field name="state" />
                 </tree>
             </field>
         </record>
@@ -74,6 +73,7 @@
                     </group>
                     <group>
                         <field name="attachment_ids" widget="many2many_binary" />
+                        <field name="state"/>
                     </group>
 
                 </form>
@@ -82,7 +82,7 @@
 
         <record model="ir.actions.act_window" id="action_flight_mission">
             <field name="name">MISIONES</field>
-            <field name="res_model">flight.mission</field>           
+            <field name="res_model">flight.mission</field>
             <field name="view_mode">tree,form,kanban</field>
         </record>
 

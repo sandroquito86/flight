@@ -26,7 +26,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
-        'views/views.xml',
+        'views/flight_medical_record.xml',
         'views/templates.xml',
         'views/flight_aircraft_view.xml',
         'views/flight_catalogue_view.xml',
@@ -35,6 +35,8 @@
         'views/flight_aircraft_view.xml', 
         'views/flight_history_securitytype_view.xml',
         'views/flight_history_equipment.xml', 
+        'views/flight_menu.xml',   
+        'views/flight_gestion_plan_semanal_view.xml',    
               
     ],
     # only loaded in demonstration mode
