@@ -63,12 +63,39 @@ class VuelosPlanificados(models.Model):
 
     
     mecanico_ids = fields.Many2many(
-        string='Mecánico',
-        comodel_name='flight.qualification',
-        relation='mecanico_vuelos_planificado_rel',
-        column1='vuelo_planificado_id',
-        column2='tripulante_mecanico_id',
-    )
+        string='Mecánico', comodel_name='flight.qualification', relation='mecanico_vuelos_planificado_rel',
+        column1='vuelo_planificado_id',column2='tripulante_mecanico_id', required=True )
+
+    ingeniero_vuelo_id = fields.Many2one(
+        string='Ingeniero de vuelo', comodel_name='flight.qualification', ondelete='restrict')
+    
+    radarista_id = fields.Many2one(
+        string='Radarista', comodel_name='flight.qualification', ondelete='restrict')
+
+    operador_electro_id = fields.Many2one(
+        string='Operador Electro/óptico', comodel_name='flight.qualification', ondelete='restrict')
+
+    taco_id = fields.Many2one(
+        string='Taco', comodel_name='flight.qualification', ondelete='restrict')
+
+    ruta_salida_id = fields.Many2one(
+        string='Ruta de salida', comodel_name='res.country.state', ondelete='restrict', 
+        domain=[('country_id','=',56]
+        )
+
+    operacion_id = fields.Many2one(
+        string='Operación o Destino', comodel_name='res.country.state', ondelete='restrict', 
+        domain=[('country_id','=',56]
+        )
+
+    ruta_retorno_id = fields.Many2one(
+        string='Ruta de retorno', comodel_name='res.country.state', ondelete='restrict', 
+        domain=[('country_id','=',56]
+        )
+
+    
+
+    
     
     
 
