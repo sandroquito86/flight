@@ -61,7 +61,7 @@
 
 
 
-        <menuitem name="Items Catalogo" id="menu_action_flight_items" parent="menu_flight_administration_catalogue" action="action_flight_items"/>
+        <menuitem name="Items Catalogo" id="menu_action_flight_items" parent="menu_flight_administration" action="action_flight_items"/>
 
 
 

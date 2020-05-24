@@ -80,17 +80,17 @@ class VuelosPlanificados(models.Model):
 
     ruta_salida_id = fields.Many2one(
         string='Ruta de salida', comodel_name='res.country.state', ondelete='restrict', 
-        domain=[('country_id','=',56]
+       
         )
 
     operacion_id = fields.Many2one(
         string='Operación o Destino', comodel_name='res.country.state', ondelete='restrict', 
-        domain=[('country_id','=',56]
+        
         )
 
     ruta_retorno_id = fields.Many2one(
         string='Ruta de retorno', comodel_name='res.country.state', ondelete='restrict', 
-        domain=[('country_id','=',56]
+        
         )
 
     

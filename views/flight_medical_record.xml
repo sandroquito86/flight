@@ -35,10 +35,12 @@
       </field>
     </record>
 
+    
+
 
     <!-- actions opening views on models -->
     <!--field name="limit">2</field-->
-    <record model="ir.actions.act_window" id="flight.action_window">
+    <record model="ir.actions.act_window" id="action_flight_medical_record">
       <field name="name">Datos Ficha Medica</field>
       <field name="res_model">flight.medical.record</field>      
       <field name="view_mode">tree,form</field>
@@ -46,7 +48,7 @@
 
 
     <!-- server action to the one above -->
-
+     <menuitem name="List" id="menu_flight_action_window" parent="menu_flight_administration" action="action_flight_medical_record"/>
 
 
 

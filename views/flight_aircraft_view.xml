@@ -44,7 +44,7 @@
             <field name="arch" type="xml">
                 <form string="testeando">
                     <sheet>
-                    
+
                         <div class="oe_button_box" name="button_box">
                             <button name="history_open_security_type" type="object" class="oe_stat_button" icon="fa-book">
                                 <field name="count_historic" string="Tipo Seguro" widget="statinfo"/>
@@ -53,7 +53,7 @@
                                 <field name="count_historic_equipment" string="Adicionales" widget="statinfo"/>
                             </button>
                         </div>
-                        
+
                         <group>
                             <field name="state"/>
                         </group>
@@ -139,6 +139,7 @@
         </record>
 
         <menuitem name="Aeronaves" id="menu_action_flight_aircraft" parent="menu_flight_records" action="action_flight_aircraft"/>
+
 
     </data>
 </odoo>
