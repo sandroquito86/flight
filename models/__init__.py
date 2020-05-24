@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from . import models
-from . import flight_aircraft
-from . import flight_crew
-from . import flight_missions
-from . import flight_catalogue
-from . import flight_history
+from . import flight_aeronave
+from . import flight_tripulante
+from . import flight_mision
+from . import flight_catalogo
+from . import flight_historico
 from . import flight_gestion_plan_semanal
 
 
