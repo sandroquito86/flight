@@ -21,14 +21,12 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="catalogue_id" 
-                                options="{'no_create_edit': True, 'no_open': True,'no_create': True}" 
-                                 />
+                                <field name="catalogo_id" options="{'no_create_edit': True, 'no_open': True,'no_create': True}" />
                             </group>
                         </group>
                         <group>
                             <field name="name"/>
-                            <field name="description"/>
+                            <field name="descripcion"/>
                         </group>
                     </sheet>
                 </form>
@@ -42,11 +40,11 @@
                 <search string="">
                     <!--buscara por los campos que especifiquemos aqui-->
                     <field name="name"/>
-                    <field name="description"/>
+                    <field name="descripcion"/>
 
                     <!--permite agrupar  por un criterio-->
                     <group>
-                        <filter name="catalogue_id" string="Agrupar Catalogo" context="{'group_by': 'catalogue_id' }" />
+                        <filter name="catalogo_id" string="Agrupar Catalogo" context="{'group_by': 'catalogo_id' }" />
                     </group>
                 </search>
             </field>
@@ -55,7 +53,7 @@
         <record model="ir.actions.act_window" id="action_flight_items">
             <field name="name">ITEMS CATALOGO</field>
             <field name="res_model">flight.items</field>
-            <field name="context" eval="{'search_default_catalogue_id':1}"></field>            
+            <field name="context" eval="{'search_default_catalogo_id':1}"></field>
             <field name="view_mode">tree,form</field>
         </record>
 

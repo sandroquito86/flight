@@ -7,30 +7,35 @@ import string
 
 class GestionPlanSemanal(models.Model):
     _name = 'flight.gestion.plan.semanal'
-    _description = 'flight.gestion.plan.semanal'
+    _description = 'flight.gestion.plan.semanal'    
+
+    descripcion = fields.Char(string='Descripción',size=80,required=True)
+
+    semana_plan_vuelo = fields.Date( string='Semana del plan de vuelo',size=80,required=True)
 
     
-
-    descripcion = fields.Char(
-        string='Descripción',size=80,required=True)
-
-    semana_plan_vuelo = fields.Date(
-        string='Semana del plan de vuelo',size=80,required=True)
-
-
-
-    estado = fields.Selection(
-        string='Estado',
-        selection=[('activo', 'activo'), ('planificado', 'planificado'),('aprobado director reparto', 'aprobado director reparto')
-            , ('aprobado operaciones COAVNA', 'aprobado operaciones COAVNA'),('aprobado director COAVNA', 'aprobado director COAVNA')
-            , ('rechazado', 'rechazado'), ('desactivado', 'desactivado')]
+    
+    planificacion_culminada = fields.Boolean(string='Planificación culminada', default=False )
+    
+    state = fields.Selection([
+        ('activo', 'activo'),
+        ('planificado', 'planificado'),
+        ('sale', 'Sales Order'),
+        ('done', 'Locked'),
+        ('cancel', 'Cancelled'),
+        ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
+    
+    
+    observacion_reparto = fields.Text(
+        string='Observaciones Director Reparto:',
     )
     
-    planificacion_culminada = fields.Boolean(
-        string='Planificación culminada', 
-        default=False
-        
+    observacion_coavna = fields.Text(
+        string='Observaciones Director COAVNA',
     )
+    
+    
+    
 
 class VuelosPlanificados(models.Model):
     _name = 'flight.vuelos.planificados'
@@ -38,7 +43,7 @@ class VuelosPlanificados(models.Model):
 
     tipo_vuelo_id = fields.Many2one(
         string='Tipo de vuelo', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 13)]", required=True)
+        domain="[('catalogo_id', '=', 13)]", required=True)
     
     aeronave_id = fields.Many2one(
         string='Aeronaves',comodel_name='flight.aircraft',ondelete='restrict',required=True)
@@ -47,7 +52,7 @@ class VuelosPlanificados(models.Model):
         string='matricula',related='aeronave_id.name',readonly=True)  
    
     mission_class_ids = fields.Many2many(
-    related='aeronave_id.mission_class_ids', readonly=True,)    
+    related='aeronave_id.mision_ids', readonly=True,)    
     
     fecha_vuelo = fields.Date(
         string='Fecha de vuelo',default=fields.Date.context_today,        
@@ -79,19 +84,13 @@ class VuelosPlanificados(models.Model):
         string='Taco', comodel_name='flight.qualification', ondelete='restrict')
 
     ruta_salida_id = fields.Many2one(
-        string='Ruta de salida', comodel_name='res.country.state', ondelete='restrict', 
-       
-        )
+        string='Ruta de salida', comodel_name='res.country.state', ondelete='restrict', )
 
     operacion_id = fields.Many2one(
-        string='Operación o Destino', comodel_name='res.country.state', ondelete='restrict', 
-        
-        )
+        string='Operación o Destino', comodel_name='res.country.state', ondelete='restrict',)
 
     ruta_retorno_id = fields.Many2one(
-        string='Ruta de retorno', comodel_name='res.country.state', ondelete='restrict', 
-        
-        )
+        string='Ruta de retorno', comodel_name='res.country.state', ondelete='restrict',)
 
     
 

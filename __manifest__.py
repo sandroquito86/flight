@@ -35,7 +35,8 @@
         'views/flight_tripulante_view.xml',          
         'views/flight_historico_tipo_seguro_view.xml',
         'views/flight_historico_equipamiento.xml',          
-        'views/flight_gestion_plan_semanal_view.xml',    
+        'views/flight_gestion_plan_semanal_view.xml',  
+        'views/flight_vuelos_planificados.xml',    
               
     ],
     # only loaded in demonstration mode

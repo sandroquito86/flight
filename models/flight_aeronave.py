@@ -12,19 +12,21 @@ class Aircraft(models.Model):
     #bandera para definir si cambio tipo de seguro
 
     name = fields.Char(string="Numero de Matrícula", 
-        required=True, size=10    )
+        required=True, size=10, 
+        help='Technical Field '
+         )
 
     
-    count_historic = fields.Integer(
+    contador_historico = fields.Integer(
         string='Historico Tipo Seguro', compute="get_contador"
     )
 
-    count_historic_equipment = fields.Integer(
+    contador_historico_equipment = fields.Integer(
         string='Historico Equipamiento Adicional', compute="get_contador_equipment"
     )
 
     
-    state = fields.Boolean(
+    estado = fields.Boolean(
         string='Activar/Desactivar' ,
         default=True
         
@@ -32,115 +34,114 @@ class Aircraft(models.Model):
     
     
 
-    aircraft_type_id = fields.Many2one(
+    tipo_aeronave_id = fields.Many2one(
         string='Tipo de aeronave', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 1)]", required=True)
+        domain="[('catalogo_id', '=', 1)]", required=True)
 
-    model_id = fields.Many2one(
+    modelo_id = fields.Many2one(
         string='Modelo', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 2)]", required=True)
+        domain="[('catalogo_id', '=', 2)]", required=True)
 
-    squadron_id = fields.Many2one(
+    escuadron_id = fields.Many2one(
         string='Escuadrón Asignado', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogue_id', '=', 3)]", required=True)
+        ondelete='restrict', domain="[('catalogo_id', '=', 3)]", required=True)
 
-    acquisition_date = fields.Date(
+    fecha_adquisicion = fields.Date(
         string='Fecha de Adquisición', required=True)
 
-    airworthiness_center = fields.Char(
+    aeronavegabilidad = fields.Char(
         string='Certificado de Aeronavegabilidad', size=70)
 
-    maker = fields.Char(string="Fabricante", size=70)
+    fabricante = fields.Char(string="Fabricante", size=70)
 
-    making_year = fields.Char(
+    anio_fabricacion = fields.Char(
         string='Año de Fabricación', required=True, size=4)
 
-    wingspan = fields.Integer(string='Envergadura',)
+    envergadura = fields.Integer(string='Envergadura',)
 
-    turbine_type_id = fields.Many2one(
+    tipo_turbina_id = fields.Many2one(
         string='Tipo de Turbina', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogue_id', '=', 4)]", required=True)
+        ondelete='restrict', domain="[('catalogo_id', '=', 4)]", required=True)
 
     
-    power = fields.Float(
+    potencia = fields.Float(
         string='Potencia', required=True)    
 
-    engine_type_id = fields.Many2one(
+    tipo_motor_id = fields.Many2one(
         string='Tipo de Motor', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 5)]", required=True)
+        domain="[('catalogo_id', '=', 5)]", required=True)
 
-    maneuver_speed = fields.Float(
+    velocidad_maniobra = fields.Float(
         string='Velocidad de Maniobra', required=True)  
 
-    length_dimension = fields.Float(
+    longitud = fields.Float(
         string='Longitug', required=True)
     
-    height_dimension = fields.Float(
+    altura = fields.Float(
         string='Altura', required=True)  
 
-    economic_speed = fields.Float(
+    velocidad_economica = fields.Float(
         string='Velocidad Económica', required=True)
 
-    fast_speed= fields.Float(
+    crucero_rapido= fields.Float(
         string='Velocidad de Crucero Rápido', required=True)
 
-    slow_speed = fields.Float(
+    crucero_lento = fields.Float(
         string='Velocidad de Crucero Lento', required=True)
 
-    max_height = fields.Float(
+    altura_maxima = fields.Float(
         string='Altura Máxima de Vuelo', required=True)
 
-    mission_class_ids = fields.Many2many(
+    mision_ids = fields.Many2many(
         string='Clase de Mision', comodel_name='flight.mission.class',
-        relation='flight_mission_aircraft_rel', column1='mission_id',
-        column2='aircraft_id',required=True)
+        relation='flight_mision_aeronave_rel', column1='mision_id',
+        column2='aeronave_id',required=True)
 
-    navigation_equipment_id = fields.Many2one(
+    equipo_navegacion_id = fields.Many2one(
         string='Equipos de Navegación', comodel_name='flight.items',ondelete='restrict',
-        domain="[('catalogue_id', '=', 6)]", required=True)
+        domain="[('catalogo_id', '=', 6)]", required=True)
 
-    communication_id = fields.Many2one(
+    comunicacion_id = fields.Many2one(
         string='Equipos de Comunicación', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 7)]", required=True)
+        domain="[('catalogo_id', '=', 7)]", required=True)
 
-    detection_id = fields.Many2one(
+    equipo_deteccion_id = fields.Many2one(
         string='Equipos de Detección', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 8)]", required=True )
+        domain="[('catalogo_id', '=', 8)]", required=True )
 
-    max_passenger = fields.Integer(
+    num_maximo_pasajeros = fields.Integer(
         string='Número Máximo Permitido de Pasajeros', required=True )
     
-    load_number = fields.Float(string='Número Máximo Permitido de Carga', )
+    num_maximo_carga = fields.Float(string='Número Máximo Permitido de Carga', )
 
-    max_weight = fields.Float(string='Peso Máximo Permitido por Pasajero', required=True)
+    peso_max_pasajero = fields.Float(string='Peso Máximo Permitido por Pasajero', required=True)
 
-    fuel_weight = fields.Float(string='Peso total de combustible',required=True)
+    peso_tot_combustible = fields.Float(string='Peso total de combustible',required=True)
 
-    take_off_weight = fields.Float(string='Peso máximo de despegue',required=True)  
+    peso_max_despegue = fields.Float(string='Peso máximo de despegue',required=True)  
 
-    security_type_id = fields.Many2one(
+    tipo_seguro_id = fields.Many2one(
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 10)]", required=True)
+        domain="[('catalogo_id', '=', 10)]", required=True)
 
-    change_radiogram= fields.Char(
+    cambio_radiograma= fields.Char(
         string="Radiograma de Cambio de Seguro", required=True, size=70)
 
-    security_observation= fields.Text(
+    observacion_seguro= fields.Text(
         string="Observaciones del seguro", required=True, size=250)  
 
-    status_id = fields.Many2one(
+    estado_id = fields.Many2one(
         string='Estado', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 9)]", required=True)
+        domain="[('catalogo_id', '=', 9)]", required=True)
 
-    additional_ids = fields.Many2many(
+    equip_adicional_ids = fields.Many2many(
         string='Equipos Adicionales', comodel_name='flight.addtional.equipment',
-        relation='flight_additional_aircraft_rel', column1='additional_id', column2='aircraft_id',)
+        relation='flight_additional_aircraft_rel', column1='adicional_id', column2='aeronave_id',)   
    
    
-   
-    security_type_id = fields.Many2one(
+    tipo_seguro_id = fields.Many2one(
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 10)]" )
+        domain="[('catalogo_id', '=', 10)]" )
     
     
     
@@ -151,7 +152,7 @@ class Aircraft(models.Model):
         
         return {
             'name': ('Historico Tipo de Seguro'),
-            'domain': [('aircraft_id', '=', self.id)],
+            'domain': [('aeronave_id', '=', self.id)],
             'res_model': 'flight.aircraft.history.securitytype',
             'view_id': False,
             'view_mode': 'tree',
@@ -162,7 +163,7 @@ class Aircraft(models.Model):
         
         return {
             'name': ('Historico Equipamiento Adicional'),
-            'domain': [('aircraft_id', '=', self.id)],
+            'domain': [('aeronave_id', '=', self.id)],
             'res_model': 'flight.aircraft.history.equipment',
             'view_id': False,
             'view_mode': 'tree',
@@ -172,109 +173,110 @@ class Aircraft(models.Model):
         
     def get_contador_equipment(self):
         #hace referencia a un objeto y permite contar en base a un criterio
-        contar= self.env['flight.aircraft.history.equipment'].search_count([('aircraft_id', '=', self.id)])
-        self.count_historic_equipment=contar
+        contar= self.env['flight.aircraft.history.equipment'].search_count([('aeronave_id', '=', self.id)])
+        self.contador_historico_equipment=contar
     
     def get_contador(self):
         #hace referencia a un objeto y permite contar en base a un criterio
-        contar= self.env['flight.aircraft.history.securitytype'].search_count([('aircraft_id', '=', self.id)])
-        self.count_historic=contar
+        contar= self.env['flight.aircraft.history.securitytype'].search_count([('aeronave_id', '=', self.id)])
+        self.contador_historico=contar
     
     #Ingreso del historico
     @api.model
     def create(self, values):  
         result = super(Aircraft, self).create(values)
         listar=[]
-        for item in result.additional_ids:
+        for item in result.equip_adicional_ids:
              listar.append(item.name)
-        self.env['flight.aircraft.history.equipment'].create({'history_additional_equipment':str(listar),'aircraft_id':result.id})
+        self.env['flight.aircraft.history.equipment'].create({'equipamento_adicional':str(listar),'aeronave_id':result.id})
         vals={
-            'history_security_type_id':values['security_type_id'],
-            'history_change_radiogram':values['change_radiogram'],
-            'history_security_observation':values['security_observation'],            
-            'aircraft_id':result.id,
-        }
-        
+            'tipo_seguro_id':values['tipo_seguro_id'],
+            'radiograma_seguro':values['cambio_radiograma'],
+            'observacion_seguro':values['observacion_seguro'],            
+            'aeronave_id':result.id,
+        }        
         self.env['flight.aircraft.history.securitytype'].create(vals)              
         return result
-
     
+   
     #actualizacion de historico
-    def write(self, values):
+    def write(self, values):        
         result = super(Aircraft, self).write(values)
-        if 'additional_ids' in values:
+        if 'equip_adicional_ids' in values:
             listar=[]
-            for item in self.additional_ids:
+            for item in self.equip_adicional_ids:
                 listar.append(item.name)
-            self.env['flight.aircraft.history.equipment'].create({'history_additional_equipment':str(listar),'aircraft_id':self.id})
-       
-    
-        if 'security_type_id' in values:               
+            self.env['flight.aircraft.history.equipment'].create({'equipamento_adicional':str(listar),'aeronave_id':self.id})
+
+        if 'tipo_seguro_id' in values:               
             vals={
-                'history_security_type_id':int(self.security_type_id),
-                'history_change_radiogram':values['change_radiogram'],
-                'history_security_observation':values['security_observation'],
-                'aircraft_id':self.id,
+                'tipo_seguro_id':int(self.tipo_seguro_id),
+                'radiograma_seguro':values['cambio_radiograma'],
+                'observacion_seguro':values['observacion_seguro'],
+                'aeronave_id':self.id,
             }
-            self.env['flight.aircraft.history.securitytype'].create(vals)   
-        
+            self.env['flight.aircraft.history.securitytype'].create(vals) 
         return result
     
 
     
-    
-   
-    @api.onchange('aircraft_type_id','model_id', 'squadron_id','turbine_type_id','engine_type_id',
-    'navigation_equipment_id','communication_id', 'detection_id','status_id','security_type_id')
+    @api.onchange('tipo_aeronave_id','modelo_id', 'escuadron_id','tipo_turbina_id','tipo_motor_id',
+    'equipo_navegacion_id','comunicacion_id', 'equipo_deteccion_id','estado_id')
     def _onchange_field(self):
-        if(int(self.aircraft_type_id.catalogue_id)!=1):         self.aircraft_type_id=""
-        if(int(self.model_id.catalogue_id)!=2):                 self.model_id=""
-        if(int(self.squadron_id.catalogue_id)!=3):              self.squadron_id=""
-        if(int(self.turbine_type_id.catalogue_id)!=4):          self.turbine_type_id=""        
-        if(int(self.engine_type_id.catalogue_id)!=5):           self.engine_type_id=""        
-        if(int(self.navigation_equipment_id.catalogue_id)!=6):  self.navigation_equipment_id=""
-        if(int(self.communication_id.catalogue_id)!=7):         self.communication_id=""
-        if(int(self.detection_id.catalogue_id)!=8):             self.detection_id=""
-        if(int(self.status_id.catalogue_id)!=9):                self.status_id=""
-        if(int(self.security_type_id.catalogue_id)!=10):        
-            self.security_type_id=""
-        else:
-            self.change_radiogram=""
-            self.security_observation=""
+        if(int(self.tipo_aeronave_id.catalogo_id)!=1):         self.tipo_aeronave_id=""
+        if(int(self.modelo_id.catalogo_id)!=2):                self.modelo_id=""
+        if(int(self.escuadron_id.catalogo_id)!=3):             self.escuadron_id=""
+        if(int(self.tipo_turbina_id.catalogo_id)!=4):          self.tipo_turbina_id=""        
+        if(int(self.tipo_motor_id.catalogo_id)!=5):            self.tipo_motor_id=""        
+        if(int(self.equipo_navegacion_id.catalogo_id)!=6):     self.equipo_navegacion_id=""
+        if(int(self.comunicacion_id.catalogo_id)!=7):          self.comunicacion_id=""
+        if(int(self.equipo_deteccion_id.catalogo_id)!=8):      self.equipo_deteccion_id=""
+        if(int(self.estado_id.catalogo_id)!=9):                self.estado_id=""
        
+    
+    @api.onchange('tipo_seguro_id')
+    def _onchange_field2(self):          
+        if(int(self.tipo_seguro_id.catalogo_id)==10):        
+            self.cambio_radiograma=""
+            self.observacion_seguro=""            
+        else:
+            self.tipo_seguro_id=""
+            
+   
+    
               
 
     warning = {'title': 'Advertancia!', 'message' : 'Your message.' }
    
-    @api.onchange('name','maker','making_year','change_radiogram')
+    @api.onchange('name','fabricante','anio_fabricacion','cambio_radiograma',)
     def _name_validation_name(self):
         flag=False
         if set(str(self.name)).difference(ascii_letters + digits + '-'):
             self.warning['message'] ="Caracteres Invalidos en campo NÚMERO DE MATRÍCULA"  
             flag=True 
             self.name=""                            
-        if set(str(self.maker)).difference(ascii_letters + digits + '-'):  
+        if set(str(self.fabricante)).difference(ascii_letters + digits + '-'):  
             self.warning['message'] ="Caracteres Invalidos en campo FABRICANTE"   
             flag=True
-            self.maker=""
-        if self.making_year:
-            if ((not str(self.making_year).isdigit()) or len(str(self.making_year))!=4):
+            self.fabricante=""
+        if self.anio_fabricacion:
+            if ((not str(self.anio_fabricacion).isdigit()) or len(str(self.anio_fabricacion))!=4):
                 self.warning['message'] ="AÑO DE FABRICACIÓN debe tener 4 dígitos"  
                 flag=True  
-                self.making_year=""          
-        if set(str(self.change_radiogram)).difference(ascii_letters + digits + '-'):
+                self.anio_fabricacion=""          
+        if set(str(self.cambio_radiograma)).difference(ascii_letters + digits + '-'):
             self.warning['message'] ="Caracteres Invalidos en campo RADIOGRAMA DE CAMBIO DE SEGURO"      
             flag=True
-            self.change_radiogram=""   
+            self.cambio_radiograma=""   
         if flag:                                 
             return {'warning': self.warning}
 
     
-    @api.onchange('take_off_weight')
-    def _take_off_weight_validate(self):
-        if self.take_off_weight < (self.max_passenger*self.max_weight)+self.fuel_weight:
-            self.take_off_weight=""
+    @api.onchange('peso_max_despegue')
+    def _peso_max_despegue_validate(self):
+        if self.peso_max_despegue < (self.num_maximo_pasajeros*self.peso_max_pasajero)+self.peso_tot_combustible:
+            self.peso_max_despegue=""
             self.warning['message'] = "El peso máximo de despegue no puede ser menor\n(Número Máximo Permitido de Pasajeros * Peso Máximo Permitido por Pasajero)+ Peso total de combustible)"
             return {'warning': self.warning}   
     
-  
+   

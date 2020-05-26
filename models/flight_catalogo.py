@@ -13,11 +13,13 @@ class Catalogue(models.Model):
     required=True
     )
 
-    sub_catalogue_ids = fields.One2many(
+    items_ids = fields.One2many(
         string='Catalogo',
         comodel_name='flight.items',
-        inverse_name='catalogue_id',
+        inverse_name='catalogo_id',
     )
+    
+    
 
 
 class Items(models.Model):
@@ -29,12 +31,12 @@ class Items(models.Model):
     required=True
     )    
 
-    description = fields.Char(string="Descripcion", 
+    descripcion = fields.Char(string="Descripcion", 
     required=True
     )
 
     
-    catalogue_id = fields.Many2one(
+    catalogo_id = fields.Many2one(
         string='Catalogo',
         comodel_name='flight.catalogue',
         ondelete='restrict',
@@ -42,27 +44,31 @@ class Items(models.Model):
 
     _sql_constraints = [
         ('name_unique',
-         'UNIQUE(catalogue_id,name)',
+         'UNIQUE(catalogo_id,name)',
          "Items debe ser único dentro de cada catálogo"),
     ]
+    
+    
+  
+    
     
 
     @api.constrains('name')
     def _check_name_insensitive(self):
-        model_ids = self.search(['&',('id', '!=',self.id),('catalogue_id', '=', int(self.catalogue_id))])        
+        model_ids = self.search(['&',('id', '!=',self.id),('catalogo_id', '=', int(self.catalogo_id))])        
         list_names = [x.name.upper() for x in model_ids if x.name]        
         if self.name.upper() in list_names:
             raise ValidationError("Ya existe un registro con el nombre: %s " % (self.name.upper()))
-            
-            
+          
+           
 
  
 class MisionClass(models.Model):
    _name = 'flight.mission.class'
    _description = 'flight.mission.class'
    name = fields.Char(string="Clase de Misión", 
-    required=True
-    )
+    required=True )
+   
 
 class AdditionalEquipment(models.Model):
    _name = 'flight.addtional.equipment'
@@ -70,6 +76,5 @@ class AdditionalEquipment(models.Model):
    _rec_name= "name"
 
    name = fields.Char(string="Equipo Adicional", 
-    required=True
-    )
+    required=True )
 

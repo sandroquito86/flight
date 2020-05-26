@@ -9,9 +9,9 @@
                 <tree>
                     <field name="create_date" string="Fecha y Hora"/>
                     <field name="create_uid" string="Usuario"/>
-                    <field name="history_security_type_id" />
-                    <field name="history_change_radiogram" />
-                    <field name="history_security_observation" />
+                    <field name="tipo_seguro_id" />
+                    <field name="radiograma_seguro" />
+                    <field name="observacion_seguro" />
                 </tree>
             </field>
         </record>

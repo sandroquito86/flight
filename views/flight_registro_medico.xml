@@ -2,16 +2,18 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="flight.list">
-      <field name="name">flight.medical.record</field>
-      <field name="model">flight.medical.record</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="result_id"/>
-          <field name="date_report"/>
-        </tree>
-      </field>
-    </record>
+    <record model="ir.ui.view" id="view_flight_medical_record_tree">
+            <field name="name">flight.medical.record</field>
+            <field name="model">flight.medical.record</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="result_id"/>
+                    <field name="date_report"/>
+                    
+
+                </tree>
+            </field>
+        </record>
 
     <record id="view_fligrew_form" model="ir.ui.view">
       <field name="name">flight.medical.record</field>
@@ -48,7 +50,7 @@
 
 
     <!-- server action to the one above -->
-     <menuitem name="List" id="menu_flight_action_window" parent="menu_flight_administration" action="action_flight_medical_record"/>
+     <menuitem name="Registro Medico" id="menu_flight_action_window" parent="menu_flight_administration" action="action_flight_medical_record"/>
 
 
 

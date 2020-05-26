@@ -13,31 +13,26 @@ class Mission(models.Model):
    required=True, size=20
    )
        
-   mission_type_id = fields.Many2one(
+   tipo_mision_id = fields.Many2one(
         string='Tipo de Misión', comodel_name='flight.mission.class',
-        ondelete='restrict',
-   )
+        ondelete='restrict', )
 
-   training_program = fields.Char(
+   programa_entrenamiento = fields.Char(
       string="Programa de entrenamiento o Programa operativo", 
-      related='attachment_ids.name',     
-      )
-
+      related='attachment_ids.name', )
+   #adjuntar archivo PDF
    attachment_ids = fields.Many2many(
         comodel_name='ir.attachment', relation='attachments_rel',
         column1='mission_id', column2='attachment_id', string='Archivo Adjunto')
    
    
-   state = fields.Boolean(
-       string='Estado',default=True
-   )
+   estado = fields.Boolean(string='Estado',default=True)
    
 
    warning = {
         'title': 'Advertancia!',
         'message' : 'Archivo PDF subido con exito.'
          }
-
   
       
    @api.onchange('name')
@@ -57,7 +52,8 @@ class Mission(models.Model):
          if self.attachment_ids.name:
             if not text.endswith(".pdf"): 
                self.attachment_ids.unlink()
-               self.warning['message'] ="Solo se puede subir archivos PDF!!"            
+               self.warning['message'] ="Solo se puede subir archivos PDF!!"
+                        
             else:
                if(text.find(" ")<0):
                   if set(text).difference(ascii_letters + digits + '-' + '.'):                                

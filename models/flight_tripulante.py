@@ -14,8 +14,7 @@ class Tripulantes(models.Model):
       size=10    ) 
    
    
-    name = fields.Char(size=15)
-   
+    name = fields.Char(size=15) 
         
 
     crew_degree = fields.Char(
@@ -28,13 +27,12 @@ class Tripulantes(models.Model):
        inverse_name='hr_employee_id',
        limit=2,
         )
-
    
     crew_result_id = fields.Many2one(
         string='Resultado',
         comodel_name='flight.items',
         ondelete='restrict',
-        domain="[('catalogue_id', '=', 11)]",
+        domain="[('catalogo_id', '=', 11)]",
          )
    
     crew_date_report = fields.Date(
@@ -75,7 +73,7 @@ class MedicalRecord(models.Model):
         string='Resultado',
         comodel_name='flight.items',
         ondelete='restrict',
-        domain="[('catalogue_id', '=', 11)]",
+        domain="[('catalogo_id', '=', 11)]",
         required=True    )
     
    date_report = fields.Date(
@@ -120,7 +118,7 @@ class MedicalRecord(models.Model):
 
    @api.onchange('result_id')
    def _onchange_field(self):        
-        if(int(self.result_id.catalogue_id)!=11):
+        if(int(self.result_id.catalogo_id)!=11):
             self.result_id=""
 
    @api.model
@@ -151,7 +149,7 @@ class Qualification(models.Model):
 
     qualification_id = fields.Many2one(
         string='Habilitacion', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogue_id', '=', 12)]", )
+        domain="[('catalogo_id', '=', 12)]", )
 
     
     _sql_constraints = [

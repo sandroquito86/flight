@@ -24,8 +24,6 @@
                     <page string="Datos Ficha Médica">
                         <group>
                             <field name="medical_record_ids"/>
-
-
                         </group>
                     </page>
                 </xpath>

@@ -7,7 +7,7 @@
       <field name="model">flight.gestion.plan.semanal</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="descripcion"/>         
+          <field name="descripcion"/>
         </tree>
       </field>
     </record>
@@ -17,12 +17,22 @@
       <field name="model">flight.gestion.plan.semanal</field>
       <field name="arch" type="xml">
         <form string="NUEVO">
+          <header>
+            <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+            <field name="state" widget="statusbar" statusbar_visible="activo,planificado,sale"/>
+          </header>
           <sheet>
             <group>
               <group>
                 <field name="descripcion"/>
-                <field name="estado"/>
-                
+                <field name="semana_plan_vuelo"/>
+
+
+              </group>
+              <group>
+                <field name="planificacion_culminada"/>
+                <field name="observacion_reparto"/>
+                <field name="observacion_coavna"/>
               </group>
             </group>
             <group>
@@ -37,14 +47,14 @@
     <!--field name="limit">2</field-->
     <record model="ir.actions.act_window" id="action_gestion_plan_semanal">
       <field name="name">GESTIÓN PLAN DE VUELO SEMANAL</field>
-      <field name="res_model">flight.gestion.plan.semanal</field>      
+      <field name="res_model">flight.gestion.plan.semanal</field>
       <field name="view_mode">tree,form</field>
     </record>
 
 
     <!-- server action to the one above -->
     <menuitem name="Gestión de plan de vuelo semanal" id="submenu_gestion_plan_semanal" parent="menu_flight_flight" action="action_gestion_plan_semanal"/>
-       
+
 
 
 
