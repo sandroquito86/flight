@@ -26,7 +26,8 @@
               <group>
                 <field name="descripcion"/>
                 <field name="semana_plan_vuelo"/>
-
+               
+                
 
               </group>
               <group>

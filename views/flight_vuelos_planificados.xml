@@ -20,18 +20,32 @@
                 <form string="NUEVO">
                     <sheet>
                         <group>
-                            <field name="aeronave_id"/>
-                            <field name="mission_class_ids"/>
-                           
-                        </group>
-                        <group>
-
+                            <group>
+                                <field name="aeronave_id"/>
+                                <field name="mision_planvuelo_ids" widget="many2many_tags"/>   
+                                                                                                                      
+                                
+                                 <field name="hora"/>
+                                <field name="copiloto_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 2)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="ingeniero_vuelo_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 3)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="operador_electro_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 9)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="ruta_salida_id" domain="[('country_id', '=', 63)]"/>
+                                <field name="ruta_retorno_id" domain="[('country_id', '=', 63)]"/>                                
+                            </group>
+                            <group>
+                                <field name="matricula"/>
+                                <field name="fecha_vuelo"/>
+                                <field name="piloto_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 1)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="mecanico_ids" widget="many2many_tags" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 4)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="radarista_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 8)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="taco_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 7)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="operacion_id" domain="[('country_id', '=', 63)]"/>
+                            </group>
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
-
 
 
         <record model="ir.actions.act_window" id="action_flight_vuelos_planificados">

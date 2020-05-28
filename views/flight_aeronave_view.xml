@@ -85,11 +85,23 @@
                                 </page>
                                 <page string="Velocidad">
                                     <group>
-                                        <field name="velocidad_economica"/>
-                                        <field name="crucero_rapido"/>
-                                        <field name="crucero_lento"/>
-                                        <field name="altura_maxima"/>
-                                        <field name="mision_ids" widget="many2many_tags"/>
+
+                                        <group>
+                                            <field name="velocidad_economica"/>
+                                            <field name="crucero_rapido"/>
+                                            <field name="crucero_lento"/>
+                                            <field name="altura_maxima"/>
+
+                                        </group>
+                                        <group>
+                                            <field name="aeronaves_ids">
+                                                <tree editable="botton">
+                                                    <field name="mision_id"/>
+                                                    
+                                                </tree>
+
+                                            </field>
+                                        </group>
                                     </group>
                                 </page>
                                 <page string="Equipos">

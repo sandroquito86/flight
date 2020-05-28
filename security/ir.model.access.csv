@@ -17,6 +17,10 @@ access_flight_gestion_plan_semanal,flight.gestion.plan.semanal,model_flight_gest
 
 access_flight_vuelos_planificados,flight.vuelos.planificados,model_flight_vuelos_planificados,base.group_user,1,1,1,1
 
+access_flight_habilitaciones,flight.habilitaciones,model_flight_habilitaciones,base.group_user,1,1,1,1
+access_flight_mision_planvuelo,flight.mision.planvuelo,model_flight_mision_planvuelo,base.group_user,1,1,1,1
+
+
 
 
 

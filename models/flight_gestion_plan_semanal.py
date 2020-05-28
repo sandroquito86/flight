@@ -11,9 +11,7 @@ class GestionPlanSemanal(models.Model):
 
     descripcion = fields.Char(string='Descripción',size=80,required=True)
 
-    semana_plan_vuelo = fields.Date( string='Semana del plan de vuelo',size=80,required=True)
-
-    
+    semana_plan_vuelo = fields.Date( string='Semana del plan de vuelo',size=80,required=True)    
     
     planificacion_culminada = fields.Boolean(string='Planificación culminada', default=False )
     
@@ -23,8 +21,7 @@ class GestionPlanSemanal(models.Model):
         ('sale', 'Sales Order'),
         ('done', 'Locked'),
         ('cancel', 'Cancelled'),
-        ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
-    
+        ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='activo')    
     
     observacion_reparto = fields.Text(
         string='Observaciones Director Reparto:',
@@ -32,27 +29,39 @@ class GestionPlanSemanal(models.Model):
     
     observacion_coavna = fields.Text(
         string='Observaciones Director COAVNA',
-    )
-    
-    
-    
+    )      
 
 class VuelosPlanificados(models.Model):
     _name = 'flight.vuelos.planificados'
     _description = 'flight.vuelos.planificados'
 
     tipo_vuelo_id = fields.Many2one(
-        string='Tipo de vuelo', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 13)]", required=True)
+        string='Tipo de vuelo', comodel_name='flight.items', ondelete='restrict', domain="[('catalogo_id', '=', 12)]",)
     
     aeronave_id = fields.Many2one(
         string='Aeronaves',comodel_name='flight.aircraft',ondelete='restrict',required=True)
 
     matricula = fields.Char(
-        string='matricula',related='aeronave_id.name',readonly=True)  
+        string='matricula',related='aeronave_id.name',store=True )   
+    
+    
+    
+    mision_planvuelo_ids = fields.Many2many(
+        string='Misiones Plan de Vuelo',
+        comodel_name='flight.mision.planvuelo',
+        relation='plavuelo_misionplanvuelo_rel',
+        column1='vueloplanificado_id',
+        column2='misionvueloplanificado_id', 
+        domain="[('aeronave_id', '=', aeronave_id)]"
+     )
+     
+     
+     
+    
+    
    
-    mission_class_ids = fields.Many2many(
-    related='aeronave_id.mision_ids', readonly=True,)    
+    
+       
     
     fecha_vuelo = fields.Date(
         string='Fecha de vuelo',default=fields.Date.context_today,        
@@ -61,28 +70,23 @@ class VuelosPlanificados(models.Model):
     hora = fields.Date( string='Hora',default=fields.Date.context_today,)
 
     piloto_id = fields.Many2one(
-        string='Piloto', comodel_name='flight.qualification', ondelete='restrict', required=True)
-
-    copiloto_id = fields.Many2one(
-        string='Piloto', comodel_name='flight.qualification', ondelete='restrict')
-
+        string='Piloto', comodel_name='flight.qualification', ondelete='restrict', )    
     
-    mecanico_ids = fields.Many2many(
-        string='Mecánico', comodel_name='flight.qualification', relation='mecanico_vuelos_planificado_rel',
-        column1='vuelo_planificado_id',column2='tripulante_mecanico_id', required=True )
-
+    copiloto_id = fields.Many2one(
+        string='Copiloto', comodel_name='flight.qualification',ondelete='restrict')    
+    
     ingeniero_vuelo_id = fields.Many2one(
         string='Ingeniero de vuelo', comodel_name='flight.qualification', ondelete='restrict')
     
-    radarista_id = fields.Many2one(
-        string='Radarista', comodel_name='flight.qualification', ondelete='restrict')
-
     operador_electro_id = fields.Many2one(
         string='Operador Electro/óptico', comodel_name='flight.qualification', ondelete='restrict')
+    
+    radarista_id = fields.Many2one(
+        string='Radarista', comodel_name='flight.qualification', ondelete='restrict', )    
 
     taco_id = fields.Many2one(
         string='Taco', comodel_name='flight.qualification', ondelete='restrict')
-
+    
     ruta_salida_id = fields.Many2one(
         string='Ruta de salida', comodel_name='res.country.state', ondelete='restrict', )
 
@@ -91,9 +95,22 @@ class VuelosPlanificados(models.Model):
 
     ruta_retorno_id = fields.Many2one(
         string='Ruta de retorno', comodel_name='res.country.state', ondelete='restrict',)
-
     
-
+    
+    mecanico_ids = fields.One2many(
+        string='Mecánico', comodel_name='flight.qualification', inverse_name='habilitacion_id', ) 
+    
+    
+    """
+    @api.onchange('aeronave_id')
+    def _onchange_field(self):             
+        domain=[('aeronave_id','=',int(self.aeronave_id))]        
+        record=self.env['flight.mision.planvuelo'].search(domain)
+        #raise ValidationError("llego {}".format(record)  
+        self.mision_planvuelo_ids=record
+    """
+    
+    
     
     
     

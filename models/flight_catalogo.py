@@ -34,7 +34,6 @@ class Items(models.Model):
     descripcion = fields.Char(string="Descripcion", 
     required=True
     )
-
     
     catalogo_id = fields.Many2one(
         string='Catalogo',
@@ -46,13 +45,9 @@ class Items(models.Model):
         ('name_unique',
          'UNIQUE(catalogo_id,name)',
          "Items debe ser único dentro de cada catálogo"),
-    ]
-    
+    ]    
     
   
-    
-    
-
     @api.constrains('name')
     def _check_name_insensitive(self):
         model_ids = self.search(['&',('id', '!=',self.id),('catalogo_id', '=', int(self.catalogo_id))])        
@@ -66,15 +61,59 @@ class Items(models.Model):
 class MisionClass(models.Model):
    _name = 'flight.mission.class'
    _description = 'flight.mission.class'
-   name = fields.Char(string="Clase de Misión", 
-    required=True )
    
-
+   name = fields.Char(string="Clase de Misión", 
+    required=True ) 
+   
+    
+ 
 class AdditionalEquipment(models.Model):
-   _name = 'flight.addtional.equipment'
-   _description = 'flight.addtional.equipment'
-   _rec_name= "name"
+    _name = 'flight.addtional.equipment'
+    _description = 'flight.addtional.equipment'
+    _rec_name= "name"
 
-   name = fields.Char(string="Equipo Adicional", 
+    name = fields.Char(string="Equipo Adicional", 
     required=True )
+    
+    
+   
+class Habilitaciones (models.Model):
+    _name = 'flight.habilitaciones'
+    _description = 'flight.habilitaciones'    
+    
+    name = fields.Char(
+        string='Nombre',
+    )
+    
+class MisionPlanVuelo(models.Model):
+    _name = 'flight.mision.planvuelo'
+    _description = 'flight.mision.planvuelo'
+    _rec_name = 'mision_id'    
+    
+    mision_id = fields.Many2one(
+        string='Mision',
+        comodel_name='flight.mission.class',
+        ondelete='restrict',
+    )   
+    
+    aeronave_id = fields.Many2one(
+        string='Aeronave',
+        comodel_name='flight.aircraft',
+        ondelete='restrict',
+    )
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+    
 

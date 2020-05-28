@@ -57,7 +57,7 @@ class Tripulantes(models.Model):
     quatification_ids = fields.One2many(
        string='Habilitaciones',
        comodel_name='flight.qualification',
-       inverse_name='crew_id',
+       inverse_name='tripulante_id',
    )
 
     
@@ -139,24 +139,33 @@ class MedicalRecord(models.Model):
 class Qualification(models.Model):
     _name = 'flight.qualification'
     _description = 'flight.qualification'
+    _rec_name = 'tripulante_id'
+    
+    
+    
+   
+    
 
     
-    crew_id = fields.Many2one(
+    tripulante_id = fields.Many2one(
         string='Tripulantes', comodel_name='hr.employee', ondelete='restrict',) 
     
-    aircraft_id = fields.Many2one(
+    aeronave_id = fields.Many2one(
         string='Aeronaves',comodel_name='flight.aircraft',ondelete='restrict',)
 
-    qualification_id = fields.Many2one(
-        string='Habilitacion', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 12)]", )
+   
+    habilitacion_id = fields.Many2one(
+        string='Habilitacion', comodel_name='flight.habilitaciones', ondelete='restrict',)
+       
 
     
     _sql_constraints = [
         ('name_unique',
-         'UNIQUE(aircraft_id)',
-         "Items debe ser único dentro de cada catálogo"),
+         'UNIQUE(tripulante_id,aeronave_id,habilitacion_id)',
+         "Ya se encuentra habilitado en la Aeronave seleccionada"),
     ]
+    
+    
     
     
     

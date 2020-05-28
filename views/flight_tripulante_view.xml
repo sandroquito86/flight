@@ -13,8 +13,8 @@
                         <group>
                             <field name="quatification_ids">
                                 <tree editable="botton">                                   
-                                    <field name="aircraft_id"/>
-                                    <field name="qualification_id"/>
+                                    <field name="aeronave_id"/>
+                                    <field name="habilitacion_id"/>
                                 </tree>
                             </field>
                         </group>

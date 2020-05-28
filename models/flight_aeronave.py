@@ -91,12 +91,19 @@ class Aircraft(models.Model):
 
     altura_maxima = fields.Float(
         string='Altura Máxima de Vuelo', required=True)
-
-    mision_ids = fields.Many2many(
-        string='Clase de Mision', comodel_name='flight.mission.class',
-        relation='flight_mision_aeronave_rel', column1='mision_id',
-        column2='aeronave_id',required=True)
-
+    
+    
+    
+    aeronaves_ids = fields.One2many(
+        string='Misiones',
+        comodel_name='flight.mision.planvuelo',
+        inverse_name='aeronave_id',
+    )
+       
+    
+    
+    
+    
     equipo_navegacion_id = fields.Many2one(
         string='Equipos de Navegación', comodel_name='flight.items',ondelete='restrict',
         domain="[('catalogo_id', '=', 6)]", required=True)
@@ -136,17 +143,13 @@ class Aircraft(models.Model):
 
     equip_adicional_ids = fields.Many2many(
         string='Equipos Adicionales', comodel_name='flight.addtional.equipment',
-        relation='flight_additional_aircraft_rel', column1='adicional_id', column2='aeronave_id',)   
+        relation='flight_additional_aircraft_rel', column1='aeronave_id',column2='adicional_id')   
    
    
     tipo_seguro_id = fields.Many2one(
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
         domain="[('catalogo_id', '=', 10)]" )
-    
-    
-    
-    
-
+   
     #Abrimos la vista historico
     def history_open_security_type(self):
         
@@ -169,7 +172,6 @@ class Aircraft(models.Model):
             'view_mode': 'tree',
             'type': 'ir.actions.act_window',
         }
-
         
     def get_contador_equipment(self):
         #hace referencia a un objeto y permite contar en base a un criterio
@@ -233,6 +235,7 @@ class Aircraft(models.Model):
         if(int(self.equipo_deteccion_id.catalogo_id)!=8):      self.equipo_deteccion_id=""
         if(int(self.estado_id.catalogo_id)!=9):                self.estado_id=""
        
+       
     
     @api.onchange('tipo_seguro_id')
     def _onchange_field2(self):          
@@ -243,9 +246,6 @@ class Aircraft(models.Model):
             self.tipo_seguro_id=""
             
    
-    
-              
-
     warning = {'title': 'Advertancia!', 'message' : 'Your message.' }
    
     @api.onchange('name','fabricante','anio_fabricacion','cambio_radiograma',)
@@ -270,7 +270,6 @@ class Aircraft(models.Model):
             self.cambio_radiograma=""   
         if flag:                                 
             return {'warning': self.warning}
-
     
     @api.onchange('peso_max_despegue')
     def _peso_max_despegue_validate(self):
