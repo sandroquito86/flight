@@ -45,7 +45,7 @@
 
 
     <!-- server action to the one above -->
-     <menuitem name="Habilitaciones" id="menu_flight_habilitaciones" parent="menu_flight_administration" action="action_flight_habilitaciones" sequence="3"/>
+     <menuitem name="Habilitaciones" id="menu_flight_habilitaciones" parent="menu_flight_administration" action="action_flight_habilitaciones" sequence="4"/>
 
 
 

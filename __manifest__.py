@@ -43,6 +43,8 @@
         'views/flight_vuelos_planificados.xml', 
         'views/flight_habilitaciones.xml', 
         'views/flight_escuadron.xml', 
+        'views/flight_tipos_motores.xml', 
+        
            
               
     ],
