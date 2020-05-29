@@ -5,7 +5,7 @@ class HistorySecurityType(models.Model):
     _description = 'flight.aircraft.history.securitytype'
 
     tipo_seguro_id = fields.Many2one(string='Tipo de Seguro', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogo_id', '=', 10)]",)
+        ondelete='restrict', domain="[('catalogo_id', '=', 8)]",)
 
     radiograma_seguro= fields.Char(string="Radiograma de Cambio de Seguro" ,size=70)
 

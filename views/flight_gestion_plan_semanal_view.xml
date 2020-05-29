@@ -26,9 +26,6 @@
               <group>
                 <field name="descripcion"/>
                 <field name="semana_plan_vuelo"/>
-               
-                
-
               </group>
               <group>
                 <field name="planificacion_culminada"/>
@@ -37,6 +34,7 @@
               </group>
             </group>
             <group>
+              <field name="vuelosplanificados_ids"/>
             </group>
           </sheet>
         </form>

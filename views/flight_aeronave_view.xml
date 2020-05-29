@@ -91,16 +91,14 @@
                                             <field name="crucero_rapido"/>
                                             <field name="crucero_lento"/>
                                             <field name="altura_maxima"/>
-
                                         </group>
                                         <group>
-                                            <field name="aeronaves_ids">
+                                            <field name="mision_plan_vuelo_ids">
                                                 <tree editable="botton">
-                                                    <field name="mision_id"/>
-                                                    
+                                                    <field name="mision_id"/>                                                    
                                                 </tree>
-
                                             </field>
+                                           
                                         </group>
                                     </group>
                                 </page>
@@ -110,6 +108,7 @@
                                         <field name="comunicacion_id" options="{'no_open': True}"/>
                                         <field name="equipo_deteccion_id" options="{'no_open': True}"/>
                                         <field name="equip_adicional_ids" widget="many2many_tags"/>
+                                        
 
                                     </group>
                                 </page>
@@ -149,9 +148,6 @@
             <field name="res_model">flight.aircraft</field>
             <field name="view_mode">tree,form</field>
         </record>
-
         <menuitem name="Aeronaves" id="menu_action_flight_aircraft" parent="menu_flight_records" action="action_flight_aircraft"/>
-
-
     </data>
 </odoo>

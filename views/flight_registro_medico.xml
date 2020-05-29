@@ -48,9 +48,8 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-
     <!-- server action to the one above -->
-     <menuitem name="Registro Medico" id="menu_flight_action_window" parent="menu_flight_administration" action="action_flight_medical_record"/>
+     <menuitem name="Registro Medico" id="menu_flight_action_window" parent="menu_flight_administration" action="action_flight_medical_record" sequence="1"/>
 
 
 

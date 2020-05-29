@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="items_tipo_aeronave_1" model="flight.items">
+            <field name="name">AVION</field>
+            <field name="descripcion">AVION</field>
+            <field name="catalogo_id">1</field>
+        </record>
+        <record id="items_tipo_aeronave_2" model="flight.items">
+            <field name="name">HELICOPTERO</field>
+            <field name="descripcion">HELICOPTERO</field>
+            <field name="catalogo_id">1</field>
+        </record>
+        <record id="items_tipo_aeronave_3" model="flight.items">
+            <field name="name">UAV</field>
+            <field name="descripcion">UAV</field>
+            <field name="catalogo_id">1</field>
+        </record>
+        <record id="items_modelo_1" model="flight.items">
+            <field name="name">BELL-430</field>
+            <field name="descripcion">BELL-430</field>
+            <field name="catalogo_id">2</field>
+        </record>
+        <record id="items_modelo_2" model="flight.items">
+            <field name="name">BELL-230</field>
+            <field name="descripcion">BELL-230</field>
+            <field name="catalogo_id">2</field>
+        </record>
+        <record id="items_modelo_3" model="flight.items">
+            <field name="name">BELL-206</field>
+            <field name="descripcion">BELL-206</field>
+            <field name="catalogo_id">2</field>
+        </record>
+        <record id="items_modelo_4" model="flight.items">
+            <field name="name">S.K.A 300</field>
+            <field name="descripcion">S.K.A 300</field>
+            <field name="catalogo_id">2</field>
+        </record>
+        <record id="items_modelo_5" model="flight.items">
+            <field name="name">S.K.A-200</field>
+            <field name="descripcion">S.K.A-200</field>
+            <field name="catalogo_id">2</field>
+        </record>
+        <record id="items_modelo_6" model="flight.items">
+            <field name="name">CN 235</field>
+            <field name="descripcion">CN 235</field>
+            <field name="catalogo_id">1</field>
+        </record>
+        <record id="items_modelo_7" model="flight.items">
+            <field name="name">T35 B</field>
+            <field name="descripcion">T35 B</field>
+            <field name="catalogo_id">1</field>
+        </record>
+
+
+
+        <!--MOTORES-->
+        <record id="items_modelo_7" model="flight.items">
+            <field name="name">T35 B</field>
+            <field name="descripcion">T35 B</field>
+            <field name="catalogo_id">1</field>
+        </record>
+
+        
+
+
+
+
+    </data>
+</odoo>

@@ -42,9 +42,15 @@ class Aircraft(models.Model):
         string='Modelo', comodel_name='flight.items', ondelete='restrict',
         domain="[('catalogo_id', '=', 2)]", required=True)
 
+   
+    
+    
     escuadron_id = fields.Many2one(
-        string='Escuadrón Asignado', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogo_id', '=', 3)]", required=True)
+        string='Escuadron',
+        comodel_name='flight.escuadron',
+        ondelete='restrict',
+    )
+    
 
     fecha_adquisicion = fields.Date(
         string='Fecha de Adquisición', required=True)
@@ -61,15 +67,15 @@ class Aircraft(models.Model):
 
     tipo_turbina_id = fields.Many2one(
         string='Tipo de Turbina', comodel_name='flight.items',
-        ondelete='restrict', domain="[('catalogo_id', '=', 4)]", required=True)
+        ondelete='restrict', domain="[('catalogo_id', '=', 3)]", required=True)
 
     
     potencia = fields.Float(
         string='Potencia', required=True)    
 
     tipo_motor_id = fields.Many2one(
-        string='Tipo de Motor', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 5)]", required=True)
+        string='Tipo de Motor', comodel_name='flight.tipos.motores', ondelete='restrict', required=True)
+    
 
     velocidad_maniobra = fields.Float(
         string='Velocidad de Maniobra', required=True)  
@@ -92,29 +98,25 @@ class Aircraft(models.Model):
     altura_maxima = fields.Float(
         string='Altura Máxima de Vuelo', required=True)
     
-    
-    
-    aeronaves_ids = fields.One2many(
+    mision_plan_vuelo_ids = fields.One2many(
         string='Misiones',
         comodel_name='flight.mision.planvuelo',
-        inverse_name='aeronave_id',
+        inverse_name='aeronave_id',        
+        ondelete='restrict'        
     )
-       
     
-    
-    
-    
+  
     equipo_navegacion_id = fields.Many2one(
         string='Equipos de Navegación', comodel_name='flight.items',ondelete='restrict',
-        domain="[('catalogo_id', '=', 6)]", required=True)
+        domain="[('catalogo_id', '=', 4)]", required=True)
 
     comunicacion_id = fields.Many2one(
         string='Equipos de Comunicación', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 7)]", required=True)
+        domain="[('catalogo_id', '=', 5)]", required=True)
 
     equipo_deteccion_id = fields.Many2one(
         string='Equipos de Detección', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 8)]", required=True )
+        domain="[('catalogo_id', '=', 6)]", required=True )
 
     num_maximo_pasajeros = fields.Integer(
         string='Número Máximo Permitido de Pasajeros', required=True )
@@ -129,7 +131,7 @@ class Aircraft(models.Model):
 
     tipo_seguro_id = fields.Many2one(
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 10)]", required=True)
+        domain="[('catalogo_id', '=', 8)]", required=True)
 
     cambio_radiograma= fields.Char(
         string="Radiograma de Cambio de Seguro", required=True, size=70)
@@ -139,7 +141,7 @@ class Aircraft(models.Model):
 
     estado_id = fields.Many2one(
         string='Estado', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 9)]", required=True)
+        domain="[('catalogo_id', '=', 7)]", required=True)
 
     equip_adicional_ids = fields.Many2many(
         string='Equipos Adicionales', comodel_name='flight.addtional.equipment',
@@ -148,7 +150,7 @@ class Aircraft(models.Model):
    
     tipo_seguro_id = fields.Many2one(
         string='Tipo de Seguro', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', 10)]" )
+        domain="[('catalogo_id', '=', 8)]" )
    
     #Abrimos la vista historico
     def history_open_security_type(self):
@@ -222,24 +224,22 @@ class Aircraft(models.Model):
     
 
     
-    @api.onchange('tipo_aeronave_id','modelo_id', 'escuadron_id','tipo_turbina_id','tipo_motor_id',
+    @api.onchange('tipo_aeronave_id','modelo_id','tipo_turbina_id','tipo_motor_id',
     'equipo_navegacion_id','comunicacion_id', 'equipo_deteccion_id','estado_id')
     def _onchange_field(self):
         if(int(self.tipo_aeronave_id.catalogo_id)!=1):         self.tipo_aeronave_id=""
-        if(int(self.modelo_id.catalogo_id)!=2):                self.modelo_id=""
-        if(int(self.escuadron_id.catalogo_id)!=3):             self.escuadron_id=""
-        if(int(self.tipo_turbina_id.catalogo_id)!=4):          self.tipo_turbina_id=""        
-        if(int(self.tipo_motor_id.catalogo_id)!=5):            self.tipo_motor_id=""        
-        if(int(self.equipo_navegacion_id.catalogo_id)!=6):     self.equipo_navegacion_id=""
-        if(int(self.comunicacion_id.catalogo_id)!=7):          self.comunicacion_id=""
-        if(int(self.equipo_deteccion_id.catalogo_id)!=8):      self.equipo_deteccion_id=""
-        if(int(self.estado_id.catalogo_id)!=9):                self.estado_id=""
+        if(int(self.modelo_id.catalogo_id)!=2):                self.modelo_id=""       
+        if(int(self.tipo_turbina_id.catalogo_id)!=3):          self.tipo_turbina_id=""           
+        if(int(self.equipo_navegacion_id.catalogo_id)!=4):     self.equipo_navegacion_id=""
+        if(int(self.comunicacion_id.catalogo_id)!=5):          self.comunicacion_id=""
+        if(int(self.equipo_deteccion_id.catalogo_id)!=6):      self.equipo_deteccion_id=""
+        if(int(self.estado_id.catalogo_id)!=7):                self.estado_id=""
        
        
     
     @api.onchange('tipo_seguro_id')
     def _onchange_field2(self):          
-        if(int(self.tipo_seguro_id.catalogo_id)==10):        
+        if(int(self.tipo_seguro_id.catalogo_id)==8):        
             self.cambio_radiograma=""
             self.observacion_seguro=""            
         else:

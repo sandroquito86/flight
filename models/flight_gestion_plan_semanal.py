@@ -4,10 +4,13 @@ _logger = logging.getLogger(__name__)
 from odoo import models, fields, api
 from string import ascii_letters, digits
 import string 
+import time
+import datetime
 
 class GestionPlanSemanal(models.Model):
     _name = 'flight.gestion.plan.semanal'
-    _description = 'flight.gestion.plan.semanal'    
+    _description = 'flight.gestion.plan.semanal'  
+  
 
     descripcion = fields.Char(string='Descripción',size=80,required=True)
 
@@ -29,22 +32,28 @@ class GestionPlanSemanal(models.Model):
     
     observacion_coavna = fields.Text(
         string='Observaciones Director COAVNA',
-    )      
+    )    
+    
+    
+    vuelosplanificados_ids = fields.One2many(
+        string='Vuelos',
+        comodel_name='flight.vuelos.planificados',
+        inverse_name='gestion_plan_semanal_id',
+    )
+      
 
 class VuelosPlanificados(models.Model):
     _name = 'flight.vuelos.planificados'
     _description = 'flight.vuelos.planificados'
 
     tipo_vuelo_id = fields.Many2one(
-        string='Tipo de vuelo', comodel_name='flight.items', ondelete='restrict', domain="[('catalogo_id', '=', 12)]",)
+        string='Tipo de vuelo', comodel_name='flight.items', ondelete='restrict', domain="[('catalogo_id', '=', 10)]",required=True)
     
     aeronave_id = fields.Many2one(
         string='Aeronaves',comodel_name='flight.aircraft',ondelete='restrict',required=True)
 
     matricula = fields.Char(
-        string='matricula',related='aeronave_id.name',store=True )   
-    
-    
+        string='matricula',related='aeronave_id.name', store=False ) 
     
     mision_planvuelo_ids = fields.Many2many(
         string='Misiones Plan de Vuelo',
@@ -52,22 +61,18 @@ class VuelosPlanificados(models.Model):
         relation='plavuelo_misionplanvuelo_rel',
         column1='vueloplanificado_id',
         column2='misionvueloplanificado_id', 
-        domain="[('aeronave_id', '=', aeronave_id)]"
+        domain="[('aeronave_id', '=', aeronave_id)]",
+        ondelete='restrict'
      )
-     
-     
-     
     
-    
-   
-    
-       
     
     fecha_vuelo = fields.Date(
-        string='Fecha de vuelo',default=fields.Date.context_today,        
-        domain=[('fecha_vuelo','>=',fields.Date.context_today)])
-    
-    hora = fields.Date( string='Hora',default=fields.Date.context_today,)
+        string='Fecha de vuelo',default=fields.Date.context_today,required=True,               
+        domain=[('fecha_vuelo','>=',fields.Date.context_today)])    
+       
+    hora = fields.Many2one(
+        string='Hora', comodel_name='flight.items', ondelete='restrict',
+        domain="[('catalogo_id', '=', )]")
 
     piloto_id = fields.Many2one(
         string='Piloto', comodel_name='flight.qualification', ondelete='restrict', )    
@@ -97,19 +102,50 @@ class VuelosPlanificados(models.Model):
         string='Ruta de retorno', comodel_name='res.country.state', ondelete='restrict',)
     
     
-    mecanico_ids = fields.One2many(
-        string='Mecánico', comodel_name='flight.qualification', inverse_name='habilitacion_id', ) 
     
     
-    """
-    @api.onchange('aeronave_id')
-    def _onchange_field(self):             
-        domain=[('aeronave_id','=',int(self.aeronave_id))]        
-        record=self.env['flight.mision.planvuelo'].search(domain)
-        #raise ValidationError("llego {}".format(record)  
-        self.mision_planvuelo_ids=record
-    """
+    mecanico_ids = fields.Many2many(
+        string='Mecánico',
+        comodel_name='flight.qualification',
+        relation='vueloplanificado_habilitacion_rel',
+        column1='vueloplanificado_id',
+        column2='habilitacion_id',
+        
+    )
     
+    
+    gestion_plan_semanal_id = fields.Many2one(
+        string='Plan Semanal',
+        comodel_name='flight.gestion.plan.semanal',
+        ondelete='restrict',
+    )
+    
+    warning = {'title': 'Advertancia!', 'message' : 'Your message.' }
+    
+    
+    @api.onchange('fecha_vuelo')
+    def _onchange_fecha_vuelo(self):        
+        if str(self.fecha_vuelo) < str(datetime.datetime.now().strftime("%Y-%m-%d")):                
+            self.fecha_vuelo=datetime.datetime.now().strftime("%Y-%m-%d")
+            self.warning['message']="Fecha no puede ser menor a la fecha del sistema"
+            return {'warning': self.warning}
+    
+            
+            
+            
+            
+            
+    
+    
+    
+    
+   
+            
+  
+    
+    
+    
+   
     
     
     

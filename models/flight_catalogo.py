@@ -63,9 +63,17 @@ class MisionClass(models.Model):
    _description = 'flight.mission.class'
    
    name = fields.Char(string="Clase de Misión", 
-    required=True ) 
+    required=True )
    
-    
+   
+   mision_ids = fields.One2many(
+       string='Misiones',
+       comodel_name='flight.mision.planvuelo',
+       inverse_name='mision_id',       
+       ondelete='restrict'
+       
+   )
+   
  
 class AdditionalEquipment(models.Model):
     _name = 'flight.addtional.equipment'
@@ -103,8 +111,41 @@ class MisionPlanVuelo(models.Model):
     )
     
     
+class Escuadron(models.Model):
+    _name = 'flight.escuadron'
+    _description = 'flight.escuadron'   
+    
+    name = fields.Char(string='Nombre',)    
+    
+    siglas = fields.Char(string='Siglas',)    
+    
+    ciudad_id = fields.Many2one(string='Ciudad',comodel_name='flight.ciudad',
+        ondelete='restrict',)
+    
+
+
+class Ciudad(models.Model):
+    _name = 'flight.ciudad'
+    _description = 'flight.ciudad'   
+    
+    name = fields.Char(string='Ciudad',)     
+    
+
+class TiposMotores(models.Model):
+    _name = 'flight.tipos.motores'
+    _description = 'flight.tipos.motores'    
+    
+    name = fields.Char(string='Nombre',)
+    modelo = fields.Char(string='Modelo',)
     
     
+    
+    
+    
+    
+    
+    
+
     
     
     

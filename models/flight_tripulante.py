@@ -32,7 +32,7 @@ class Tripulantes(models.Model):
         string='Resultado',
         comodel_name='flight.items',
         ondelete='restrict',
-        domain="[('catalogo_id', '=', 11)]",
+        domain="[('catalogo_id', '=', 8)]",
          )
    
     crew_date_report = fields.Date(
@@ -73,7 +73,7 @@ class MedicalRecord(models.Model):
         string='Resultado',
         comodel_name='flight.items',
         ondelete='restrict',
-        domain="[('catalogo_id', '=', 11)]",
+        domain="[('catalogo_id', '=', 9)]",
         required=True    )
     
    date_report = fields.Date(
@@ -118,7 +118,7 @@ class MedicalRecord(models.Model):
 
    @api.onchange('result_id')
    def _onchange_field(self):        
-        if(int(self.result_id.catalogo_id)!=11):
+        if(int(self.result_id.catalogo_id)!=8):
             self.result_id=""
 
    @api.model
@@ -140,12 +140,6 @@ class Qualification(models.Model):
     _name = 'flight.qualification'
     _description = 'flight.qualification'
     _rec_name = 'tripulante_id'
-    
-    
-    
-   
-    
-
     
     tripulante_id = fields.Many2one(
         string='Tripulantes', comodel_name='hr.employee', ondelete='restrict',) 

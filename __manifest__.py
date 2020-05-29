@@ -25,7 +25,11 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'data/data.xml',    
+        'data/data_catalogo.xml',
+        'data/data_items.xml', 
+        'data/data_mision.xml',  
+        'data/data_habilitacion.xml',  
+        'data/data_escuadron.xml',
         'views/flight_menu.xml',    
         'views/flight_registro_medico.xml',
         'views/templates.xml',
@@ -36,11 +40,16 @@
         'views/flight_historico_tipo_seguro_view.xml',
         'views/flight_historico_equipamiento.xml',          
         'views/flight_gestion_plan_semanal_view.xml',  
-        'views/flight_vuelos_planificados.xml',    
+        'views/flight_vuelos_planificados.xml', 
+        'views/flight_habilitaciones.xml', 
+        'views/flight_escuadron.xml', 
+           
               
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
-    ],
+    ]
+   
+  
 }
