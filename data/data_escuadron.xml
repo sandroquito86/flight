@@ -45,9 +45,5 @@
             <field name="siglas">ESCAIN</field>
             <field name="ciudad_id">3</field>
         </record>
-
-
-
-
     </data>
 </odoo>

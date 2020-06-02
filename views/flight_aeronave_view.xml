@@ -64,8 +64,10 @@
                                     <group>
 
                                         <field name="name"/>
-                                        <field name="tipo_aeronave_id" options="{'no_open': True}"/>
-                                        <field name="modelo_id" options="{'no_open': True}"/>
+                                        <field name="tipo_aeronave_id" options="{'no_open': True}" />
+                                        <field name="modelo_id" options="{'no_open': True}" context="{'default_catalogo_id': 2}"
+                                        
+                                        />
                                         <field name="escuadron_id" options="{'no_open': True}"/>
                                         <field name="fecha_adquisicion" />
                                         <field name="aeronavegabilidad"/>
@@ -95,7 +97,7 @@
                                         <group>
                                             <field name="mision_plan_vuelo_ids">
                                                 <tree editable="botton">
-                                                    <field name="mision_id"/>                                                    
+                                                    <field name="mision_id" />                                                    
                                                 </tree>
                                             </field>
                                            

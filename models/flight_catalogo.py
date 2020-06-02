@@ -66,13 +66,10 @@ class MisionClass(models.Model):
     required=True )
    
    
-   mision_ids = fields.One2many(
-       string='Misiones',
-       comodel_name='flight.mision.planvuelo',
-       inverse_name='mision_id',       
-       ondelete='restrict'
+ 
+   
        
-   )
+   
    
  
 class AdditionalEquipment(models.Model):
@@ -81,6 +78,8 @@ class AdditionalEquipment(models.Model):
     _rec_name= "name"
 
     name = fields.Char(string="Equipo Adicional", 
+    required=True )
+    descripcion = fields.Char(string="Descripcion", 
     required=True )
     
     

@@ -67,7 +67,8 @@ class Tripulantes(models.Model):
 class MedicalRecord(models.Model):
    _name = 'flight.medical.record'
    _description = 'flight.medical.record'
-   _order="date_report desc,create_date desc" 
+   _order="date_report desc,create_date desc"
+   _rec_name='result_id'
    
    result_id = fields.Many2one(
         string='Resultado',
@@ -118,7 +119,7 @@ class MedicalRecord(models.Model):
 
    @api.onchange('result_id')
    def _onchange_field(self):        
-        if(int(self.result_id.catalogo_id)!=8):
+        if(int(self.result_id.catalogo_id)!=9):
             self.result_id=""
 
    @api.model

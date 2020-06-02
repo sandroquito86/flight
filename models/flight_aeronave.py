@@ -63,7 +63,7 @@ class Aircraft(models.Model):
     anio_fabricacion = fields.Char(
         string='Año de Fabricación', required=True, size=4)
 
-    envergadura = fields.Integer(string='Envergadura',)
+    envergadura = fields.Float(string='Envergadura',)
 
     tipo_turbina_id = fields.Many2one(
         string='Tipo de Turbina', comodel_name='flight.items',
@@ -248,7 +248,7 @@ class Aircraft(models.Model):
    
     warning = {'title': 'Advertancia!', 'message' : 'Your message.' }
    
-    @api.onchange('name','fabricante','anio_fabricacion','cambio_radiograma',)
+    @api.onchange('name','anio_fabricacion','cambio_radiograma',)
     def _name_validation_name(self):
         flag=False
         if set(str(self.name)).difference(ascii_letters + digits + '-'):
@@ -258,12 +258,7 @@ class Aircraft(models.Model):
         if set(str(self.fabricante)).difference(ascii_letters + digits + '-'):  
             self.warning['message'] ="Caracteres Invalidos en campo FABRICANTE"   
             flag=True
-            self.fabricante=""
-        if self.anio_fabricacion:
-            if ((not str(self.anio_fabricacion).isdigit()) or len(str(self.anio_fabricacion))!=4):
-                self.warning['message'] ="AÑO DE FABRICACIÓN debe tener 4 dígitos"  
-                flag=True  
-                self.anio_fabricacion=""          
+            self.fabricante=""             
         if set(str(self.cambio_radiograma)).difference(ascii_letters + digits + '-'):
             self.warning['message'] ="Caracteres Invalidos en campo RADIOGRAMA DE CAMBIO DE SEGURO"      
             flag=True

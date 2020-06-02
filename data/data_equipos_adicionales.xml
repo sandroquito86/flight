@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--EQUIPOS ADICIONALES-->
+        <record id="tipo_equipos_adicionales_1" model="flight.addtional.equipment">
+            <field name="name">RADAR</field>
+            <field name="descripcion">EQUIPOS ADICIONALES RADAR</field>
+        </record>
+        <record id="tipo_equipos_adicionales_2" model="flight.addtional.equipment">
+            <field name="name">ELECTRO OPTICO</field>
+            <field name="descripcion">EQUIPOS ADICIONALES ELECTRO OPTICO</field>
+        </record>
+        <record id="tipo_equipos_adicionales_3" model="flight.addtional.equipment">
+            <field name="name">ELECTRO-OPTICO NO TRIPULADO</field>
+            <field name="descripcion">EQUIPOS ADICIONALES ELECTRO-OPTICO NO TRIPULADO</field>
+        </record>
+       
+    </data>
+</odoo>

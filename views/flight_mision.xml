@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="view_flight_mission_class_tree">
+            <field name="name">flight.mission.class</field>
+            <field name="model">flight.mission.class</field>
+            <field name="arch" type="xml">
+                <tree>                   
+                   <field name="name"/>                   
+                </tree>
+            </field>
+        </record>
+
+          
+        <!--field name="limit">2</field-->
+        <record model="ir.actions.act_window" id="action_flight_mission_class">
+            <field name="name">MISIONES</field>
+            <field name="res_model">flight.mission.class</field>
+            <field name="view_mode">tree</field>
+        </record>
+        <!-- server action to the one above -->
+        <menuitem name="Mision" id="menu_action_flight_mission_class" parent="menu_flight_administration" action="action_flight_mission_class" sequence="5"/>
+
+    </data>
+</odoo>

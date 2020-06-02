@@ -7,6 +7,7 @@ from . import flight_mision
 from . import flight_catalogo
 from . import flight_historico
 from . import flight_gestion_plan_semanal
+from . import flight_aprobacion_plan_vuelo
 
 
 

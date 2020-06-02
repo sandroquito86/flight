@@ -18,8 +18,12 @@
       <field name="arch" type="xml">
         <form string="NUEVO">
           <header>
-            <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
-            <field name="state" widget="statusbar" statusbar_visible="activo,planificado,sale"/>
+            <button name="action_confirm_operador_reparto" string="Confirmar reparto" type="object" attrs="{'invisible': [('state', '=', 'planificado')]}"/>
+            <button name="action_confirm_comandante_reparto" string="Confirmar 01" states='planificado' type="object"  class="oe_highlight" attrs="{'invisible': [('state', '=', 'aprobado_reparto')]}"/>
+            <button name="action_confirm_operador_coavna" type="object" states='aprobado_reparto' string="Confir Operador Coavna" class="oe_highlight" attrs="{'invisible': [('state', '=', 'ope_coavna')]}"/>
+            <button name="action_confirm_comandante_coavna" type="object" states='ope_coavna' string="comandante coavna" class="oe_highlight" />
+
+            <field name="state" widget="statusbar" statusbar_visible="activo,planificado,aprobado_reparto,ope_coavna,aprobado_coavna"/>
           </header>
           <sheet>
             <group>

@@ -9,8 +9,7 @@
         <record id="catalogue_id2" model="flight.catalogue">
             <field name="id">2</field>
             <field name="name">Modelo</field>
-        </record>
-        
+        </record>        
 
         <record id="catalogue_id4" model="flight.catalogue">
             <field name="id">3</field>

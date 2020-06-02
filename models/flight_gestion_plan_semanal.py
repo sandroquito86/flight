@@ -19,11 +19,11 @@ class GestionPlanSemanal(models.Model):
     planificacion_culminada = fields.Boolean(string='Planificación culminada', default=False )
     
     state = fields.Selection([
-        ('activo', 'activo'),
-        ('planificado', 'planificado'),
-        ('sale', 'Sales Order'),
-        ('done', 'Locked'),
-        ('cancel', 'Cancelled'),
+        ('activo', 'Activo'),
+        ('planificado', 'Planificado'),
+        ('aprobado_reparto', 'Aprobado Comandante Reparto'),
+        ('ope_coavna', 'Aprobado Operador COAVNA'),
+        ('aprobado_coavna', 'Aprobado Comandante COAVNA'),
         ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='activo')    
     
     observacion_reparto = fields.Text(
@@ -40,6 +40,18 @@ class GestionPlanSemanal(models.Model):
         comodel_name='flight.vuelos.planificados',
         inverse_name='gestion_plan_semanal_id',
     )
+    
+    def action_confirm_operador_reparto(self):
+        self.write({'state': 'planificado'})
+        
+    def action_confirm_comandante_reparto(self):
+        self.write({'state': 'aprobado_reparto'})
+        
+    def action_confirm_operador_coavna(self):
+        self.write({'state': 'ope_coavna'})
+        
+    def action_confirm_comandante_coavna(self):
+        self.write({'state': 'aprobado_coavna'})
       
 
 class VuelosPlanificados(models.Model):
@@ -72,7 +84,7 @@ class VuelosPlanificados(models.Model):
        
     hora = fields.Many2one(
         string='Hora', comodel_name='flight.items', ondelete='restrict',
-        domain="[('catalogo_id', '=', )]")
+        domain="[('catalogo_id', '=', 11)]")
 
     piloto_id = fields.Many2one(
         string='Piloto', comodel_name='flight.qualification', ondelete='restrict', )    

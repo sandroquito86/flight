@@ -21,9 +21,9 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="tipo_vuelo_id" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="tipo_vuelo_id"/>
                                 <field name="aeronave_id"/>
-                                <field name="mision_planvuelo_ids" widget="many2many_tags" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
+                                <field name="mision_planvuelo_ids" widget="many2many_tags"/>
                                 <field name="hora"/>
                                 <field name="copiloto_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 2)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
                                 <field name="ingeniero_vuelo_id" domain="[('aeronave_id', '=', aeronave_id),('habilitacion_id', '=', 3)]" options="{'no_create_edit': True, 'no_open': True,'no_create': True}"/>
@@ -47,7 +47,25 @@
         </record>
 
 
-       
+        <record model="ir.actions.act_window" id="action_flight_vuelos_planificados">
+            <field name="name">VUELOS PLANIFICADOS</field>
+            <field name="res_model">flight.vuelos.planificados</field>
+            <field name="context" eval="{'search_default_catalogo_id':1}"></field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem name="Items Catalogo" id="menu_action_flight_vuelos_planificados" parent="menu_flight_reservations" action="action_flight_vuelos_planificados"/>
+
+
+
+
+
+
+
+
+
 
     </data>
 </odoo>
